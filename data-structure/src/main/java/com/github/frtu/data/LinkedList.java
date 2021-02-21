@@ -1,7 +1,7 @@
 package com.github.frtu.data;
 
 public class LinkedList<T> {
-    public class Node<T> {
+    public static class Node<T> {
         private Node<T> next;
         private T value;
 
