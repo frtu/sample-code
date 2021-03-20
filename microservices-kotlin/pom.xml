@@ -11,7 +11,15 @@
     <groupId>com.github.frtu.sample.service</groupId>
     <artifactId>microservices-kotlin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    
+    <packaging>pom</packaging>
+
+    <name>Sample microservices apps</name>
+    <description>Sample microservices apps</description>
+
+    <modules>
+        <module>service-a</module>
+    </modules>
+
     <properties>
         <start-class>com.github.frtu.sample.service.ApplicationKt</start-class>
         <!--===========================-->
@@ -159,10 +167,12 @@
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-reflect</artifactId>
+            <version>${kotlin.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
@@ -174,6 +184,7 @@
         <dependency>
             <groupId>io.kotlintest</groupId>
             <artifactId>kotlintest-runner-junit5</artifactId>
+            <version>${kotlin.test.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
