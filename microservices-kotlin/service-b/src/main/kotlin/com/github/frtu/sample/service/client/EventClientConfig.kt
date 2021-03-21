@@ -6,15 +6,16 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.reactive.function.client.WebClient
 
+
 @Configuration
-class EventServiceConfig {
+class EventClientConfig {
     @ConstructorBinding
     @ConfigurationProperties(prefix = "service")
     data class ServiceCall(var baseUrl: String)
 
     @Bean
-    fun webClient(serviceCall: ServiceCall): WebClient {
-        return WebClient.builder()
+    fun webClient(webClientBuilder: WebClient.Builder, serviceCall: ServiceCall): WebClient {
+        return webClientBuilder
             .baseUrl(serviceCall.baseUrl)
             .build()
     }
