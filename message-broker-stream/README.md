@@ -2,10 +2,15 @@
 
 ## About
 
-Convert to Kotlin spring-cloud-stream sample : 
+Project description
 
-* [https://spring.io/blog/2019/10/15/simple-event-driven-microservices-with-spring-cloud-stream](https://spring.io/blog/2019/10/15/simple-event-driven-microservices-with-spring-cloud-stream)
+### Publisher
 
+More info at [/message-broker-stream-publisher](/message-broker-stream-publisher)
+
+### Subscriber / Streaming for project
+
+More info at [/message-broker-stream-stream](/message-broker-stream-stream)
 
 ## Release notes
 
