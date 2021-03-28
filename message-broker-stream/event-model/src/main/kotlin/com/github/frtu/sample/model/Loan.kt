@@ -1,4 +1,4 @@
-package com.github.frtu.sample.springcloud.loan
+package com.github.frtu.sample.model
 
 enum class Statuses {
     APPROVED, DECLINED, PENDING, REJECTED
