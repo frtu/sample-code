@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Import
 import org.springframework.cloud.stream.annotation.EnableBinding
 
 @Import(LogConfigAll::class)
-@EnableConfigurationProperties(AppProperties::class)
 @SpringBootApplication
 //@EnableR2dbcRepositories
 @EnableBinding(LoanProcessor::class)
