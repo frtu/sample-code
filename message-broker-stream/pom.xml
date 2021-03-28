@@ -34,6 +34,7 @@
     </dependencyManagement>
     <modules>
         <module>event-model</module>
+        <module>message-broker-stream-publisher</module>
         <module>message-broker-stream-stream</module>
     </modules>
 </project>
