@@ -8,10 +8,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 
 @Import(LogConfigAll::class)
 //@EnableConfigurationProperties(AppProperties::class)
 @SpringBootApplication
+@EnableJpaAuditing
 //@EnableR2dbcRepositories
 class Application {
     @Bean
