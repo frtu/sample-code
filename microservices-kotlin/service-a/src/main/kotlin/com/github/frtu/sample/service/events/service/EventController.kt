@@ -11,7 +11,11 @@ class EventController(val repository: EventRepository) {
     fun findAll() = repository.findAll()
 
     @PostMapping
-    fun addCustomer(@RequestBody event: Event) = repository.save(event)
+    fun addEvent(@RequestBody event: Event) = repository.save(event)
+
+    @GetMapping("/{id}")
+    fun findById(@PathVariable id: Long) =
+        repository.findById(id).orElseThrow { IllegalArgumentException("id:[$id] doesn't exist!") }
 
     @PutMapping("/{id}")
     fun updateCustomer(@PathVariable id: Long, @RequestBody event: Event) {
@@ -21,7 +25,4 @@ class EventController(val repository: EventRepository) {
 
     @DeleteMapping("/{id}")
     fun removeCustomer(@PathVariable id: Long) = repository.deleteById(id)
-
-    @GetMapping("/{id}")
-    fun getById(@PathVariable id: Long) = repository.findById(id)
 }
