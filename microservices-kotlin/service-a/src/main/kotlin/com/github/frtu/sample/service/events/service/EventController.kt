@@ -10,6 +10,12 @@ class EventController(val repository: EventRepository) {
     @GetMapping
     fun findAll() = repository.findAll()
 
+    @CrossOrigin
+    @GetMapping("search")
+    fun findByDescription(@RequestParam("comments") comments: String): List<Event> {
+        return repository.search(comments)
+    }
+
     @PostMapping
     fun addEvent(@RequestBody event: Event) = repository.save(event)
 

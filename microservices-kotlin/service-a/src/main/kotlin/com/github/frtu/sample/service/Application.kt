@@ -9,6 +9,7 @@ import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing
+import java.util.*
 
 @Import(LogConfigAll::class)
 //@EnableConfigurationProperties(AppProperties::class)
@@ -19,7 +20,7 @@ class Application {
     @Bean
     fun init(repository: EventRepository): CommandLineRunner? {
         return CommandLineRunner { args: Array<String?>? ->
-            repository.save(Event("key", 1.0F))
+            repository.save(Event("key", 1.0F, UUID.randomUUID().toString()))
         }
     }
 }
