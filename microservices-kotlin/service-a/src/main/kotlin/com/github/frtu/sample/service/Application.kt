@@ -17,12 +17,12 @@ import java.util.*
 @EnableJpaAuditing
 //@EnableR2dbcRepositories
 class Application {
-    @Bean
-    fun init(repository: EventRepository): CommandLineRunner? {
-        return CommandLineRunner { args: Array<String?>? ->
-            repository.save(Event("key", 1.0F, UUID.randomUUID().toString()))
-        }
-    }
+//    @Bean
+//    fun init(repository: EventRepository): CommandLineRunner? {
+//        return CommandLineRunner { args: Array<String?>? ->
+//            repository.save(Event("key", 1.0F, UUID.randomUUID().toString()))
+//        }
+//    }
 }
 
 fun main(args: Array<String>) {
