@@ -31,6 +31,9 @@ data class Email(
     @Column(name = "content", nullable = false)
     var content: String? = null,
 
+    @Column(name = "status", nullable = false)
+    var status: String? = null,
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_time", nullable = false)
     @CreatedDate
