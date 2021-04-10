@@ -1,4 +1,4 @@
-# Project - event-coroutine-flow
+# Project - event-notification-web-coroutine-flow
 
 ## About
 
