@@ -85,4 +85,8 @@ pip-log.txt
 # Unit test / coverage reports
 .coverage
 .tox
+
+# Project
 event-notification-mails/docker/db/data
+
+# Others

@@ -7,6 +7,7 @@ services:
     image: postgres:12.6
     #container_name: postgres
     hostname: database
+    user: postgres
     restart: always
     ports:
       - ${DB_PORT:-5432}:5432
