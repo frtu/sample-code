@@ -37,5 +37,6 @@
         <module>models</module>
         <module>event-notification-mails-publisher</module>
         <module>event-notification-mails-stream</module>
+        <module>event-notification-web-coroutine-flow</module>
     </modules>
 </project>

@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Email display</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div id="title">
+            <h1>Email</h1>
+        </div>
+        <table id="email" class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Recipient</th>
+                <th>Subject</th>
+                <th>Content</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="result" data-th-each="email : ${emails}">
+                <td>[[${email.id}]]</td>
+                <td>[[${email.receiver}]]</td>
+                <td>[[${email.subject}]]</td>
+                <td>[[${email.content}]]</td>
+                <td>[[${email.status}]]</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

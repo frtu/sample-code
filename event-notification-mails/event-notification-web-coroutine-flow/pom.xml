@@ -41,6 +41,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.frtu.notification</groupId>
+            <artifactId>models</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!--===========================-->
         <!-- APIs -->
         <!--===========================-->
@@ -126,10 +132,10 @@
         <!--</dependency>-->
 
         <!--ENABLE FOR THYMELEAF -->
-        <!--<dependency>-->
-        <!--    <groupId>org.springframework.boot</groupId>-->
-        <!--    <artifactId>spring-boot-starter-thymeleaf</artifactId>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
         <!--===========================-->
         <!-- Utilities -->
