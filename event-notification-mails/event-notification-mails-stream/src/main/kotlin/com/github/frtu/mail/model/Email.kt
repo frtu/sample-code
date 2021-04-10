@@ -4,14 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
-import org.springframework.data.jpa.domain.support.AuditingEntityListener
 import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.util.*
 import javax.persistence.*
 
-@Entity
-@Table(schema = "notification", name = "emails")
-@EntityListeners(AuditingEntityListener::class)
+@Entity(name = "emails")
+//@Table(schema = "notification", name = "emails")
+//@EntityListeners(AuditingEntityListener::class)
 @JsonPropertyOrder("id", "receiver", "subject", "content", "createdAt", "updatedAt")
 @JsonIgnoreProperties(
     value = ["createdAt", "updatedAt"],
@@ -37,10 +38,10 @@ data class Email(
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_time", nullable = false)
     @CreatedDate
-    val creationTime: Date = Date.from(java.time.ZonedDateTime.now().toInstant()),
+    val creationTime: LocalDateTime = LocalDateTime.now(),
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_time", nullable = false)
     @LastModifiedDate
-    var updateTime: Date = creationTime
+    var updateTime: LocalDateTime = creationTime
 )

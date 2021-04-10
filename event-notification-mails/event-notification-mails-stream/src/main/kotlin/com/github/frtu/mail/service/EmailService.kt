@@ -9,9 +9,4 @@ import org.springframework.stereotype.Service
 
 @Service
 class EmailService(val emailRepository: EmailRepository) {
-    fun search(text: String, pageRequest: PageRequest): Page<Email> {
-        val entities = emailRepository.search(text, pageRequest)
-        val resultList = entities.content
-        return PageImpl(resultList, entities.pageable, entities.totalElements)
-    }
 }
