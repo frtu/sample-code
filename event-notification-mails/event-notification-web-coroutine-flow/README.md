@@ -4,6 +4,7 @@
 
 Project description
 
+* Email UI with Thymeleaf : [http://localhost:8080/](http://localhost:8080/)
 ## API
 
 * Access Swagger API at [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
