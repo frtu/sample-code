@@ -2,10 +2,14 @@
 
 ## About
 
-Project description
+UI :
 
 * Email UI with Thymeleaf : [http://localhost:8080/](http://localhost:8080/)
-* Email REST API : [http://localhost:8080/v1/emails](http://localhost:8080/v1/emails)
+
+REST API :
+
+* Find all email : [http://localhost:8080/v1/emails](http://localhost:8080/v1/emails)
+* Find everything just after email id : [http://localhost:8080/v1/emails/after/f74ae3c6-1c24-448b-9bb4-a45e617234cc](http://localhost:8080/v1/emails/after/f74ae3c6-1c24-448b-9bb4-a45e617234cc)
 
 ## API
 
