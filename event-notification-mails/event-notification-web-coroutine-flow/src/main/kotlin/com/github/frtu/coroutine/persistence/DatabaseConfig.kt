@@ -4,14 +4,30 @@ import io.r2dbc.spi.ConnectionFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
+import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
+import org.springframework.r2dbc.connection.R2dbcTransactionManager
 import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
+import org.springframework.transaction.ReactiveTransactionManager
+
+
+
 
 @EnableR2dbcRepositories
 @Configuration
 class DatabaseConfig {
+    @Bean
+    fun databaseClient(connectionFactory: ConnectionFactory): DatabaseClient {
+        return DatabaseClient.builder().connectionFactory(connectionFactory).build()
+    }
+
+    @Bean
+    fun transactionManager(connectionFactory: ConnectionFactory): ReactiveTransactionManager {
+        return R2dbcTransactionManager(connectionFactory)
+    }
+
     @Bean
     fun initializer(connectionFactory: ConnectionFactory): ConnectionFactoryInitializer {
         val initializer = ConnectionFactoryInitializer()

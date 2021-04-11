@@ -21,6 +21,11 @@ class EmailRestCoroutinesController(val repository: EmailRepository) {
         return repository.findAll()
     }
 
+    @GetMapping("/v1/emails/{id}")
+    suspend fun suspendingId(@PathVariable id: UUID): Email? {
+        return repositoryExtended.getUsingSql(id)
+    }
+
     @GetMapping("/v1/emails/after/{id}")
     suspend fun suspendingAfterId(@PathVariable id: UUID): Flow<Email> {
         return repository.afterThisId(id)
