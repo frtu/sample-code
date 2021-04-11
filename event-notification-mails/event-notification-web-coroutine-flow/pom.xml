@@ -42,7 +42,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.frtu.notification</groupId>
+            <groupId>com.github.frtu.mail</groupId>
             <artifactId>models</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -1,3 +1,5 @@
+CONTAINER_NAME='postgres_database_1'
+
 echo "Type 'startpostgres' to start postgres server"
 startpostgres() {
   echo "Make sure you have ** docker-compose ** installed !!"
