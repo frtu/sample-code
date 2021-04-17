@@ -1,9 +1,9 @@
 package com.github.frtu.coroutine.configuration
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.frtu.coroutine.biz.EmailService
 import com.github.frtu.coroutine.persistence.Email
 import com.github.frtu.coroutine.persistence.EmailDetail
+import com.github.frtu.coroutine.persistence.EmailRepository
 import com.github.frtu.persistence.coroutine.configuration.JsonR2dbcConfiguration
 import io.r2dbc.spi.ConnectionFactory
 import kotlinx.coroutines.runBlocking
@@ -41,12 +41,12 @@ class R2dbcDatabaseConfig : JsonR2dbcConfiguration() {
     }
 
     @Bean
-    fun initDatabase(service: EmailService): CommandLineRunner {
+    fun initDatabase(repository: EmailRepository): CommandLineRunner {
         val objectMapper = ObjectMapper()
         return CommandLineRunner { args: Array<String?>? ->
             runBlocking {
                 println(
-                    service.save(
+                    repository.save(
                         Email(
                             objectMapper.writeValueAsString(
                                 EmailDetail(
