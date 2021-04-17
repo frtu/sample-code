@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface EmailRepository : CoroutineCrudRepository<Email, UUID> {
+interface IEmailRepository : CoroutineCrudRepository<Email, UUID> {
     @Query("""
         SELECT * FROM email
         WHERE creation_time > (SELECT creation_time FROM email WHERE ID = :id)

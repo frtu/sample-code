@@ -15,8 +15,8 @@ import java.util.*
 
 @RestController
 class EmailRestCoroutinesController(
-    val repository: EmailRepository,
     val template: R2dbcEntityTemplate
+    val repository: IEmailRepository,
 ) {
     @GetMapping("/v1/emails")
     suspend fun findAll(): Flow<Email> = template
