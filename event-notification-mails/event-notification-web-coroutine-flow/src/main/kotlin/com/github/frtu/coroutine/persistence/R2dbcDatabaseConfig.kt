@@ -12,12 +12,9 @@ import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 import org.springframework.transaction.ReactiveTransactionManager
 
-
-
-
 @EnableR2dbcRepositories
 @Configuration
-class DatabaseConfig {
+class R2dbcDatabaseConfig {
     @Bean
     fun databaseClient(connectionFactory: ConnectionFactory): DatabaseClient {
         return DatabaseClient.builder().connectionFactory(connectionFactory).build()
