@@ -17,21 +17,12 @@ import java.util.*
     allowGetters = true
 )
 data class Email(
+    @Column("data")
+    var data: String = "{}",
+
     @Id
     @Column("id")
-    var id: UUID? = null,
-
-    @Column("receiver")
-    var receiver: String? = null,
-
-    @Column("subject")
-    var subject: String? = null,
-
-    @Column("content")
-    var content: String? = null,
-
-    @Column("status")
-    var status: String? = null,
+    var id: UUID = UUID.randomUUID(),
 
     @CreatedDate
     @Column("creation_time")

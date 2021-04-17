@@ -1,25 +1,22 @@
 package com.github.frtu.coroutine.persistence
 
+import com.github.frtu.persistence.coroutine.configuration.JsonR2dbcConfiguration
 import io.r2dbc.spi.ConnectionFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
-import org.springframework.data.r2dbc.core.DatabaseClient
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 import org.springframework.r2dbc.connection.R2dbcTransactionManager
 import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 import org.springframework.transaction.ReactiveTransactionManager
+import org.springframework.transaction.annotation.EnableTransactionManagement
 
-@EnableR2dbcRepositories
 @Configuration
-class R2dbcDatabaseConfig {
-    @Bean
-    fun databaseClient(connectionFactory: ConnectionFactory): DatabaseClient {
-        return DatabaseClient.builder().connectionFactory(connectionFactory).build()
-    }
-
+@EnableR2dbcRepositories
+@EnableTransactionManagement
+class R2dbcDatabaseConfig : JsonR2dbcConfiguration() {
     @Bean
     fun transactionManager(connectionFactory: ConnectionFactory): ReactiveTransactionManager {
         return R2dbcTransactionManager(connectionFactory)
