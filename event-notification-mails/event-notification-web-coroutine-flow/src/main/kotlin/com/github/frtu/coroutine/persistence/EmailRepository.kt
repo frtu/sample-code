@@ -41,14 +41,16 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
             Query.query(where("id").`is`(id)), Email::class.java
         ).awaitFirstOrNull() ?: throw DataNotExist(id.toString())
 
-    suspend fun update(id: UUID, email: Email): UUID? = template
+    suspend fun update(id: UUID, emailDetail: EmailDetail): UUID? = template
         .update(
             Query.query(where("id").`is`(id)),
             Update.update("email", "rndfred@163.com"),
             Email::class.java
         )
-        .map { email.id }
+        .map { id }
         .awaitFirstOrNull() ?: throw DataNotExist(id.toString())
+
+    suspend fun save(emailDetail: EmailDetail): UUID? = this.save(Email(emailDetail))
 
     suspend fun save(email: Email): UUID? = template
         .insert(Email::class.java)

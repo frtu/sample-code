@@ -2,6 +2,7 @@ package com.github.frtu.coroutine.persistence
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
@@ -33,6 +34,16 @@ data class Email(
     @Column("update_time")
     var updateTime: LocalDateTime = creationTime
 ) : Persistable<UUID> {
+    constructor(
+        value: Any,
+        identity: UUID? = null,
+        creationTime: LocalDateTime = LocalDateTime.now(),
+        updateTime: LocalDateTime = creationTime
+    ) : this(objectMapper.writeValueAsString(value), identity, creationTime, updateTime)
+
+    companion object {
+        val objectMapper = ObjectMapper()
+    }
 
     var isNewlyCreated = false;
 
