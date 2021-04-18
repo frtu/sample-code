@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.github.frtu.coroutine.persistence.Email
 import com.github.frtu.coroutine.persistence.EmailDetail
 import com.github.frtu.coroutine.persistence.EmailRepository
-import com.github.frtu.persistence.coroutine.configuration.JsonR2dbcConfiguration
+import com.github.frtu.persistence.r2dbc.configuration.BaseR2dbcConfiguration
 import io.r2dbc.spi.ConnectionFactory
 import kotlinx.coroutines.runBlocking
 import org.springframework.boot.CommandLineRunner

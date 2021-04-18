@@ -1,4 +1,4 @@
-package com.github.frtu.persistence.coroutine.configuration
+package com.github.frtu.persistence.r2dbc.configuration
 
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfigurationExtended
 

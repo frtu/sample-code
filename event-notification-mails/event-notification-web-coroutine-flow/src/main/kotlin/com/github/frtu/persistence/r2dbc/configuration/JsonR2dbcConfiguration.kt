@@ -1,4 +1,4 @@
-package com.github.frtu.persistence.coroutine.configuration
+package com.github.frtu.persistence.r2dbc.configuration
 
 import io.r2dbc.postgresql.codec.Json
 import org.springframework.core.convert.converter.Converter
