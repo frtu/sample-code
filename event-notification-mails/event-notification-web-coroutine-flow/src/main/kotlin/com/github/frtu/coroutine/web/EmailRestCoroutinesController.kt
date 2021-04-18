@@ -1,6 +1,7 @@
 package com.github.frtu.coroutine.web
 
 import com.github.frtu.coroutine.persistence.Email
+import com.github.frtu.coroutine.persistence.EmailExtendedRepository
 import com.github.frtu.coroutine.persistence.EmailRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.awaitFirstOrNull
@@ -16,8 +17,8 @@ import java.util.*
 @RestController
 class EmailRestCoroutinesController(
     val repository: EmailRepository,
-    val template: R2dbcEntityTemplate
-//    , val repositoryExtended: EmailExtendedRepository
+    val template: R2dbcEntityTemplate,
+    val repositoryExtended: EmailExtendedRepository
 ) {
     @GetMapping("/v1/emails")
     suspend fun suspendingEndpointAll(): Flow<Email> {
@@ -32,13 +33,14 @@ class EmailRestCoroutinesController(
 
     @GetMapping("/v1/emails/{id}")
     suspend fun suspendingId(@PathVariable id: UUID): Email? =
-        template.select(Email::class.java)
-        .matching(Query.query(
-            where("id").`is`(id).and(
-                where("status").`is`("INIT"))
-            )
-        )
-        .first().awaitFirstOrNull()
+//        template.select(Email::class.java)
+//        .matching(Query.query(
+//            where("id").`is`(id).and(
+//                where("status").`is`("INIT"))
+//            )
+//        )
+//        .first().awaitFirstOrNull()
+        repositoryExtended.findById(id)
 
     @GetMapping("/v1/emails/after/{id}")
     suspend fun suspendingAfterId(@PathVariable id: UUID): Flow<Email> {
