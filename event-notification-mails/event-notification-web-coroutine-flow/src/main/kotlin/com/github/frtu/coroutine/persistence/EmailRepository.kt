@@ -1,11 +1,14 @@
 package com.github.frtu.coroutine.persistence
 
 import com.github.frtu.coroutine.exception.DataNotExist
+import com.github.frtu.persistence.r2dbc.query.PostgresJsonbQueryBuilder
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrNull
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.springframework.data.domain.Pageable
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
-import org.springframework.data.relational.core.query.Criteria
 import org.springframework.data.relational.core.query.Criteria.where
 import org.springframework.data.relational.core.query.Query
 import org.springframework.data.relational.core.query.Update
@@ -14,37 +17,29 @@ import java.util.*
 
 @Repository
 class EmailRepository(val template: R2dbcEntityTemplate) {
-    suspend fun findAll(): Flow<Email> = template
-        .select(Email::class.java)
-        .all().asFlow()
+    private val LOGGER: Logger = LoggerFactory.getLogger(EmailRepository::class.java)
+    private val queryBuilder = PostgresJsonbQueryBuilder(setOf("page", "size"))
 
-    suspend fun findAll(searchParams: Map<String, String>): Flow<Email> {
-        val criteriaIterator = searchParams.filter { it.key != null && it.value != null }
-            .map { where("data->>'${it.key}'").`is`(it.value) }
-            .asSequence().iterator()
-
-        var criteria : Criteria? = null
-        if (criteriaIterator.hasNext()) {
-            criteria = criteriaIterator.next()
-            while (criteriaIterator.hasNext()) {
-                criteria = criteria?.and(criteriaIterator.next())
-            }
-        }
+    suspend fun findAll(searchParams: Map<String, String>, pageable: Pageable?): Flow<Email> {
+        LOGGER.debug("""{"query_type":"criteria", "criteria":"${searchParams}", "limit":${pageable?.pageSize}, "offset":${pageable?.offset}}""")
         return template
             .select(Email::class.java)
-            .matching(Query.query(criteria!!))
+            .matching(queryBuilder.query(searchParams, pageable))
             .all().asFlow()
     }
 
-    suspend fun findById(id: UUID): Email? = template
-        .selectOne(
-            Query.query(where("id").`is`(id)), Email::class.java
-        ).awaitFirstOrNull() ?: throw DataNotExist(id.toString())
+    suspend fun findById(id: UUID): Email? {
+        LOGGER.debug("""{"query_type":"id", "id":"${id}"}""")
+        return template
+            .selectOne(
+                queryBuilder.id(id), Email::class.java
+            ).awaitFirstOrNull() ?: throw DataNotExist(id.toString())
+    }
 
     suspend fun update(id: UUID, emailDetail: EmailDetail): UUID? = template
         .update(
-            Query.query(where("id").`is`(id)),
-            Update.update("email", "rndfred@163.com"),
+            queryBuilder.id(id),
+            Update.update("data->>'status'", emailDetail.status),
             Email::class.java
         )
         .map { id }
@@ -60,6 +55,6 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
 
     suspend fun deleteById(id: UUID): Int? = template
         .delete(
-            Query.query(where("id").`is`(id)), Email::class.java
+            queryBuilder.id(id), Email::class.java
         ).awaitFirstOrNull() ?: throw DataNotExist(id.toString())
 }
