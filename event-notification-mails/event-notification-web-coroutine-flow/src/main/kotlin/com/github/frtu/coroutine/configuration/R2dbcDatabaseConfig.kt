@@ -28,7 +28,7 @@ class R2dbcDatabaseConfig : BaseR2dbcConfiguration() {
         initializer.setConnectionFactory(connectionFactory)
         val populator = CompositeDatabasePopulator()
         populator.addPopulators(ResourceDatabasePopulator(ClassPathResource("./db/migration/V0_1_0__table-email.sql")))
-//        populator.addPopulators(ResourceDatabasePopulator(ClassPathResource("./db/migration/V0_1_1__data-email.sql")))
+        populator.addPopulators(ResourceDatabasePopulator(ClassPathResource("./db/migration/V0_1_1__partition-email.sql")))
         initializer.setDatabasePopulator(populator)
         return initializer
     }
