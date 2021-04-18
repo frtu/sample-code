@@ -27,12 +27,12 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
 
     suspend fun findById(id: UUID): Email? = template
         .selectOne(
-            Query.query(Criteria.where("id").`is`(id)), Email::class.java
+            Query.query(where("id").`is`(id)), Email::class.java
         ).awaitFirstOrNull()
 
     suspend fun update(id: UUID, email: Email): UUID? = template
         .update(
-            Query.query(Criteria.where("id").`is`(id)),
+            Query.query(where("id").`is`(id)),
             Update.update("email", "rndfred@163.com"),
             Email::class.java
         )
@@ -47,6 +47,6 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
 
     suspend fun deleteById(id: UUID): Int? = template
         .delete(
-            Query.query(Criteria.where("id").`is`(id)), Email::class.java
+            Query.query(where("id").`is`(id)), Email::class.java
         ).awaitFirstOrNull()
 }
