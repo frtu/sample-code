@@ -33,7 +33,9 @@ data class Email(
     @LastModifiedDate
     @Column("update_time")
     var updateTime: LocalDateTime = creationTime
-) : Persistable<UUID> {
+)
+//    : Persistable<UUID>
+{
     constructor(
         value: Any,
         identity: UUID? = null,
@@ -45,16 +47,16 @@ data class Email(
         val objectMapper = ObjectMapper()
     }
 
-    var isNewlyCreated = false;
-
-    init {
-        if (identity == null) {
-            isNewlyCreated = true;
-            identity = UUID.randomUUID()
-        }
-    }
-
-    override fun isNew(): Boolean = this.isNewlyCreated
-
-    override fun getId(): UUID? = this.identity
+//    var isNewlyCreated = false;
+//
+//    init {
+//        if (identity == null) {
+//            isNewlyCreated = true;
+//            identity = UUID.randomUUID()
+//        }
+//    }
+//
+//    override fun isNew(): Boolean = this.isNewlyCreated
+//
+//    override fun getId(): UUID? = this.identity
 }

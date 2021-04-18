@@ -50,7 +50,7 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
     suspend fun save(email: Email): UUID? = template
         .insert(Email::class.java)
         .using(email)
-        .map { email.id }
+        .map { email.identity }
         .awaitFirstOrNull()
 
     suspend fun deleteById(id: UUID): Int? = template

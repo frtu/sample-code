@@ -1,13 +1,7 @@
 package com.github.frtu.coroutine.configuration
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.frtu.coroutine.persistence.Email
-import com.github.frtu.coroutine.persistence.EmailDetail
-import com.github.frtu.coroutine.persistence.EmailRepository
 import com.github.frtu.persistence.r2dbc.configuration.BaseR2dbcConfiguration
 import io.r2dbc.spi.ConnectionFactory
-import kotlinx.coroutines.runBlocking
-import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
@@ -16,14 +10,8 @@ import org.springframework.r2dbc.connection.R2dbcTransactionManager
 import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
-// DEPRECATED in spring-data:1.2.x
-//import org.springframework.data.r2dbc.connectionfactory.R2dbcTransactionManager
-//import org.springframework.data.r2dbc.connectionfactory.init.CompositeDatabasePopulator
-//import org.springframework.data.r2dbc.connectionfactory.init.ConnectionFactoryInitializer
-//import org.springframework.data.r2dbc.connectionfactory.init.ResourceDatabasePopulator
 import org.springframework.transaction.ReactiveTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
-import java.util.*
 
 @Configuration
 @EnableR2dbcRepositories
@@ -44,26 +32,4 @@ class R2dbcDatabaseConfig : BaseR2dbcConfiguration() {
         initializer.setDatabasePopulator(populator)
         return initializer
     }
-
-//    @Bean
-//    fun initDatabase(repository: EmailRepository): CommandLineRunner {
-//        val objectMapper = ObjectMapper()
-//        return CommandLineRunner { args: Array<String?>? ->
-//            runBlocking {
-//                println(
-//                    repository.save(
-//                        Email(
-//                            objectMapper.writeValueAsString(
-//                                EmailDetail(
-//                                    "rndfred@163.com", "Mail subject",
-//                                    "Lorem ipsum dolor sit amet.", "SENT"
-//                                )
-//                            ),
-//                            UUID.randomUUID()
-//                        )
-//                    )
-//                )
-//            }
-//        }
-//    }
 }
