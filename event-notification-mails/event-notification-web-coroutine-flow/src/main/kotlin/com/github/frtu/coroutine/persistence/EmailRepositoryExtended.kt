@@ -16,11 +16,10 @@ class EmailExtendedRepository(private val client: DatabaseClient) {
         val query = Query.query(Criteria.where("id").`is`(id))
 
         // Build the SQL
-        val executeSpec = client.execute("SELECT * FROM email ${query.build()}")
-
-        // Bind the parameters => ATTENTION MAKE SURE TO USE THE NEWLY CREATED AND RETURNED exceutionSpec
-        val bindedExecuteSpec = query.bind(executeSpec)
-
+        val bindedExecuteSpec = client.execute("SELECT * FROM email ${query.build()}").let {
+            // Bind the parameters => ATTENTION MAKE SURE TO USE THE NEWLY CREATED AND RETURNED bindedExecuteSpec
+            query.bind(it)
+        }
         // Regular retrieve & map object
         return bindedExecuteSpec.`as`(Email::class.java)
             .fetch()
