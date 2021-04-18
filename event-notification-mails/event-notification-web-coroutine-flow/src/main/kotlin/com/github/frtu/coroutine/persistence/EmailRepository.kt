@@ -1,5 +1,6 @@
 package com.github.frtu.coroutine.persistence
 
+import com.github.frtu.coroutine.exception.DataNotExist
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitFirstOrNull
@@ -38,7 +39,7 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
     suspend fun findById(id: UUID): Email? = template
         .selectOne(
             Query.query(where("id").`is`(id)), Email::class.java
-        ).awaitFirstOrNull()
+        ).awaitFirstOrNull() ?: throw DataNotExist(id.toString())
 
     suspend fun update(id: UUID, email: Email): UUID? = template
         .update(
@@ -47,7 +48,7 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
             Email::class.java
         )
         .map { email.id }
-        .awaitFirstOrNull()
+        .awaitFirstOrNull() ?: throw DataNotExist(id.toString())
 
     suspend fun save(email: Email): UUID? = template
         .insert(Email::class.java)
@@ -58,5 +59,5 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
     suspend fun deleteById(id: UUID): Int? = template
         .delete(
             Query.query(where("id").`is`(id)), Email::class.java
-        ).awaitFirstOrNull()
+        ).awaitFirstOrNull() ?: throw DataNotExist(id.toString())
 }
