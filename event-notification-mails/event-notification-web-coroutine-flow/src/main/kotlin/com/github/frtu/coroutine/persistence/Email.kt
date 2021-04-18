@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
+import org.springframework.data.domain.Persistable
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
@@ -22,7 +23,7 @@ data class Email(
 
     @Id
     @Column("id")
-    var id: UUID = UUID.randomUUID(),
+    var identity: UUID? = null,
 
     @CreatedDate
     @Column("creation_time")
@@ -31,4 +32,18 @@ data class Email(
     @LastModifiedDate
     @Column("update_time")
     var updateTime: LocalDateTime = creationTime
-)
+) : Persistable<UUID> {
+
+    var isNewlyCreated = false;
+
+    init {
+        if (identity == null) {
+            isNewlyCreated = true;
+            identity = UUID.randomUUID()
+        }
+    }
+
+    override fun isNew(): Boolean = this.isNewlyCreated
+
+    override fun getId(): UUID? = this.identity
+}
