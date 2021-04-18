@@ -28,7 +28,7 @@ import java.util.*
 @Configuration
 @EnableR2dbcRepositories
 @EnableTransactionManagement
-class R2dbcDatabaseConfig : JsonR2dbcConfiguration() {
+class R2dbcDatabaseConfig : BaseR2dbcConfiguration() {
     @Bean
     fun transactionManager(connectionFactory: ConnectionFactory): ReactiveTransactionManager {
         return R2dbcTransactionManager(connectionFactory)
@@ -45,25 +45,25 @@ class R2dbcDatabaseConfig : JsonR2dbcConfiguration() {
         return initializer
     }
 
-    @Bean
-    fun initDatabase(repository: EmailRepository): CommandLineRunner {
-        val objectMapper = ObjectMapper()
-        return CommandLineRunner { args: Array<String?>? ->
-            runBlocking {
-                println(
-                    repository.save(
-                        Email(
-                            objectMapper.writeValueAsString(
-                                EmailDetail(
-                                    "rndfred@163.com", "Mail subject",
-                                    "Lorem ipsum dolor sit amet.", "SENT"
-                                )
-                            ),
-                            UUID.randomUUID()
-                        )
-                    )
-                )
-            }
-        }
-    }
+//    @Bean
+//    fun initDatabase(repository: EmailRepository): CommandLineRunner {
+//        val objectMapper = ObjectMapper()
+//        return CommandLineRunner { args: Array<String?>? ->
+//            runBlocking {
+//                println(
+//                    repository.save(
+//                        Email(
+//                            objectMapper.writeValueAsString(
+//                                EmailDetail(
+//                                    "rndfred@163.com", "Mail subject",
+//                                    "Lorem ipsum dolor sit amet.", "SENT"
+//                                )
+//                            ),
+//                            UUID.randomUUID()
+//                        )
+//                    )
+//                )
+//            }
+//        }
+//    }
 }

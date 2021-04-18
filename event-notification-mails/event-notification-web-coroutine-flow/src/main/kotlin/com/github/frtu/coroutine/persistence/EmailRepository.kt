@@ -18,10 +18,20 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
         .all().asFlow()
 
     suspend fun findAll(searchParams: Map<String, String>): Flow<Email> {
-        val criteria = where("data->>'receiver'").`is`(searchParams["receiver"]!!)
+        val criteriaIterator = searchParams.filter { it.key != null && it.value != null }
+            .map { where("data->>'${it.key}'").`is`(it.value) }
+            .asSequence().iterator()
+
+        var criteria : Criteria? = null
+        if (criteriaIterator.hasNext()) {
+            criteria = criteriaIterator.next()
+            while (criteriaIterator.hasNext()) {
+                criteria = criteria?.and(criteriaIterator.next())
+            }
+        }
         return template
             .select(Email::class.java)
-            .matching(Query.query(criteria))
+            .matching(Query.query(criteria!!))
             .all().asFlow()
     }
 
