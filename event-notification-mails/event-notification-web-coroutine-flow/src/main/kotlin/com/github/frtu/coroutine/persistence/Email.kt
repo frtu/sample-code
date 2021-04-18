@@ -9,8 +9,9 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 import java.util.*
+import com.github.frtu.coroutine.persistence.Email.Companion.TABLE_NAME
 
-@Table("email")
+@Table(TABLE_NAME)
 @JsonPropertyOrder("id", "receiver", "subject", "content", "createdAt", "updatedAt")
 @JsonIgnoreProperties(
     value = ["createdAt", "updatedAt"],
@@ -40,4 +41,9 @@ data class Email(
     @LastModifiedDate
     @Column("update_time")
     var updateTime: LocalDateTime = creationTime
-)
+) {
+    companion object {
+        const val TABLE_NAME = "email"
+    }
+}
+
