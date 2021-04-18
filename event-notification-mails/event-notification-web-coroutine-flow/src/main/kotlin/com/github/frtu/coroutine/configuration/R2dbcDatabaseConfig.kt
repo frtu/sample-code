@@ -16,6 +16,11 @@ import org.springframework.r2dbc.connection.R2dbcTransactionManager
 import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
+// DEPRECATED in spring-data:1.2.x
+//import org.springframework.data.r2dbc.connectionfactory.R2dbcTransactionManager
+//import org.springframework.data.r2dbc.connectionfactory.init.CompositeDatabasePopulator
+//import org.springframework.data.r2dbc.connectionfactory.init.ConnectionFactoryInitializer
+//import org.springframework.data.r2dbc.connectionfactory.init.ResourceDatabasePopulator
 import org.springframework.transaction.ReactiveTransactionManager
 import org.springframework.transaction.annotation.EnableTransactionManagement
 import java.util.*
