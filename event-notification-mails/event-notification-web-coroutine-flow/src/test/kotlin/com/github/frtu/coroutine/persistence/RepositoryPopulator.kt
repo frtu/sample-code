@@ -7,6 +7,8 @@ import com.github.frtu.coroutine.persistence.backport.EmailRepositoryDatabaseCli
 import com.github.frtu.persistence.r2dbc.configuration.JsonR2dbcConfiguration
 import io.r2dbc.spi.ConnectionFactory
 import kotlinx.coroutines.runBlocking
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -28,31 +30,60 @@ import java.util.*
 @Configuration
 @EnableR2dbcRepositories
 class RepositoryPopulatorConfig : JsonR2dbcConfiguration() {
+    private val LOGGER: Logger = LoggerFactory.getLogger(EmailRepository::class.java)
+
 //    @Bean
 //    fun previousDatabaseClient(): DatabaseClient {
 //        return PreviousDatabaseClientBuilderFactory().build()
 //    }
 
     @Bean
-    fun initDatabase(repository: EmailRepository): CommandLineRunner {
+    fun initDatabase(
+        repository: EmailRepository,
+        emailRepositoryBatch: EmailRepositoryBatch
+    ): CommandLineRunner {
         val objectMapper = ObjectMapper()
         return CommandLineRunner { args: Array<String?>? ->
             runBlocking {
                 val dateTime = LocalDateTime.now()
                 for (days in 0..24 step 2) {
-                    println(
-                        repository.save(
-                            Email(
-                                EmailDetail(
-                                    "rndfred@163.com", "Mail subject",
-                                    "Lorem ipsum dolor sit amet.", "SENT"
-                                ),
-                                UUID.randomUUID(),
-                                dateTime.plusDays(days.toLong())
-                            )
+                    val list = listOf(
+                        Email(
+                            EmailDetail(
+                                "titi@163.com", "Mail subject",
+                                "Lorem ipsum dolor sit amet.", "SENT"
+                            ),
+                            UUID.randomUUID(),
+                            dateTime.plusDays(days.toLong())
+                        ),
+                        Email(
+                            EmailDetail(
+                                "toto@163.com", "Mail subject",
+                                "Lorem ipsum dolor sit amet.", "SENT"
+                            ),
+                            UUID.randomUUID(),
+                            dateTime.plusDays(days.toLong())
                         )
                     )
+                        emailRepositoryBatch.saveAll(list)
+                            .log("loggerName")
+                            .doOnNext { id -> LOGGER.info("generated id: {}", id) }
+                            .count()
+                            .block()
+
+//                        repository.save(
+//                            Email(
+//                                EmailDetail(
+//                                    "rndfred@163.com", "Mail subject",
+//                                    "Lorem ipsum dolor sit amet.", "SENT"
+//                                ),
+//                                UUID.randomUUID(),
+//                                dateTime.plusDays(days.toLong())
+//                            )
+//                        )
+//                    )
                 }
+                println(emailRepositoryBatch.count())
             }
         }
     }
