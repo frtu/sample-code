@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Pageable
 import org.springframework.data.relational.core.query.Criteria
 import org.springframework.data.relational.core.query.Query
-import java.util.*
 
 class PostgresJsonbQueryBuilder(
     private val skipKeys: Set<String> = setOf(),

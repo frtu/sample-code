@@ -13,7 +13,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 
 @TestPropertySource(
     // Properties files
-    value = ["classpath:core.properties", "classpath:core-test.properties"]
+    value = ["classpath:core/core.properties", "classpath:core/core-test.properties"]
     // Override properties
     , properties = ["config.test.annotation=annotation_override_value"]
 )
