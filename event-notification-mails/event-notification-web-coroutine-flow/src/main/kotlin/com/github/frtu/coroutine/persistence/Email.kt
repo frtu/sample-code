@@ -3,6 +3,7 @@ package com.github.frtu.coroutine.persistence
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.frtu.coroutine.persistence.Email.Companion.TABLE_NAME
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.LastModifiedDate
@@ -12,7 +13,7 @@ import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDateTime
 import java.util.*
 
-@Table("email")
+@Table(TABLE_NAME)
 @JsonPropertyOrder("id", "receiver", "subject", "content", "createdAt", "updatedAt")
 @JsonIgnoreProperties(
     value = ["createdAt", "updatedAt"],
@@ -44,6 +45,7 @@ data class Email(
     ) : this(objectMapper.writeValueAsString(value), identity, creationTime, updateTime)
 
     companion object {
+        const val TABLE_NAME = "email"
         val objectMapper = ObjectMapper()
     }
 

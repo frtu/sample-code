@@ -2,8 +2,8 @@ package com.github.frtu.coroutine.persistence
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.github.frtu.coroutine.persistence.backport.EmailRepositoryDatabaseClient
 import com.github.frtu.persistence.r2dbc.configuration.JsonR2dbcConfiguration
 import io.r2dbc.spi.ConnectionFactory
 import kotlinx.coroutines.runBlocking
@@ -11,8 +11,9 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.ClassPathResource
+import org.springframework.data.r2dbc.core.DatabaseClient
+import org.springframework.data.r2dbc.core.PreviousDatabaseClientBuilderFactory
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
-import org.springframework.r2dbc.connection.R2dbcTransactionManager
 import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
@@ -21,14 +22,17 @@ import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 //import org.springframework.data.r2dbc.connectionfactory.init.CompositeDatabasePopulator
 //import org.springframework.data.r2dbc.connectionfactory.init.ConnectionFactoryInitializer
 //import org.springframework.data.r2dbc.connectionfactory.init.ResourceDatabasePopulator
-import org.springframework.transaction.ReactiveTransactionManager
-import org.springframework.transaction.annotation.EnableTransactionManagement
 import java.time.LocalDateTime
 import java.util.*
 
 @Configuration
 @EnableR2dbcRepositories
 class RepositoryPopulatorConfig : JsonR2dbcConfiguration() {
+//    @Bean
+//    fun previousDatabaseClient(): DatabaseClient {
+//        return PreviousDatabaseClientBuilderFactory().build()
+//    }
+
     @Bean
     fun initDatabase(repository: EmailRepository): CommandLineRunner {
         val objectMapper = ObjectMapper()
