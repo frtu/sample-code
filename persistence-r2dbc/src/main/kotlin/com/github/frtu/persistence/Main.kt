@@ -12,6 +12,7 @@ import org.springframework.context.annotation.*
 @ComponentScan
 @PropertySource("classpath:application.properties")
 @Import(R2dbcConfiguration::class)
+@SpringBootApplication
 class AppConfig
 
 fun main() {

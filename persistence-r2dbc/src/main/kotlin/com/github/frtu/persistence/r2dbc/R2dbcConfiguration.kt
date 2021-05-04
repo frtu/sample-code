@@ -57,6 +57,18 @@ class R2dbcConfiguration : AbstractR2dbcConfiguration() {
         )
     }
 
+    internal fun customConnectionFactory(): ConnectionFactory {
+        var options = ConnectionFactoryOptions.builder()
+            .option(ConnectionFactoryOptions.HOST, "localhost")
+            .option(ConnectionFactoryOptions.PORT, 5432)
+            .option(ConnectionFactoryOptions.DATABASE, "notification")
+            .option(ConnectionFactoryOptions.USER, "user_admin")
+            .option(ConnectionFactoryOptions.PASSWORD, "pass")
+            .option(ConnectionFactoryOptions.DRIVER, "postgresql")
+            .build();
+        return ConnectionFactories.get(options);
+    }
+
     @Bean
     fun initializer(connectionFactory: ConnectionFactory): ConnectionFactoryInitializer {
         val initializer = ConnectionFactoryInitializer()
