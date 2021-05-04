@@ -5,11 +5,11 @@
     <!--============================================================================================================-->
     <!-- CAN COMMENT THIS LINE AND UNCOMMENT IN dependencyManagement - ATTENTION WILL HAVE TO COPY pluginManagement -->
     <!--============================================================================================================-->
-<!--    <parent>-->
-<!--        <groupId>com.github.frtu.archetype</groupId>-->
-<!--        <artifactId>kotlin-base-pom</artifactId>-->
-<!--        <version>1.1.5-SNAPSHOT</version>-->
-<!--    </parent>-->
+    <!--    <parent>-->
+    <!--        <groupId>com.github.frtu.archetype</groupId>-->
+    <!--        <artifactId>kotlin-base-pom</artifactId>-->
+    <!--        <version>1.1.5-SNAPSHOT</version>-->
+    <!--    </parent>-->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -27,7 +27,7 @@
         <!-- <java.version>1.8</java.version>-->
         <!--===========================-->
         <!--https://kotlinlang.org/docs/reference/using-maven.html-->
-        <kotlin.version>1.4.32</kotlin.version>
+        <kotlin.version>1.4.31</kotlin.version>
         <kotlinx.coroutines.version>1.4.3</kotlinx.coroutines.version>
         <kotlin.test.version>3.4.2</kotlin.test.version>
         <!--CHECK FOR COMPILER PROPS : https://kotlinlang.org/docs/reference/using-maven.html#attributes-common-for-jvm-and-js-->
@@ -164,6 +164,18 @@
             <!--    <type>pom</type>-->
             <!--    <scope>import</scope>-->
             <!--</dependency>-->
+
+            <!-- Internal domain dependencies -->
+            <!--===============================================================================-->
+            <!-- UNCOMMMENT TO FREE PARENT - ATTENTION pluginManagement is not managed anymore -->
+            <!--===============================================================================-->
+            <dependency>
+                <groupId>com.github.frtu.archetype</groupId>
+                <artifactId>kotlin-base-pom</artifactId>
+                <version>1.1.4</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
