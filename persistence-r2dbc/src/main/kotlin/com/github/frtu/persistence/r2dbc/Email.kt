@@ -37,3 +37,7 @@ data class Email(
         const val TABLE_NAME = "email"
     }
 }
+
+enum class STATUS {
+    INIT, SENT, ERROR
+}
