@@ -6,18 +6,32 @@ import io.r2dbc.postgresql.PostgresqlConnectionConfiguration
 import io.r2dbc.postgresql.PostgresqlConnectionFactory
 import io.r2dbc.spi.ConnectionFactories
 import io.r2dbc.spi.ConnectionFactory
+import io.r2dbc.spi.ConnectionFactoryOptions
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.io.ClassPathResource
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration
 import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
+import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator
+import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
+import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 
 @Configuration
 @EnableR2dbcRepositories
 class R2dbcConfiguration : AbstractR2dbcConfiguration() {
+    companion object {
+        private val LOGGER = LoggerFactory.getLogger(R2dbcConfiguration::class.java)
+    }
+    
     @Value("\${application.persistence.url}")
     lateinit var persistenceUrl: String
 
-    override fun connectionFactory(): ConnectionFactory = ConnectionFactories.get(persistenceUrl)
+    override fun connectionFactory(): ConnectionFactory {
+        LOGGER.debug("Initialize connection using url:${persistenceUrl}")
+        return ConnectionFactories.get(persistenceUrl)
+    }
 
     internal fun h2ConnectionFactory(): ConnectionFactory {
         H2ConnectionFactory.inMemory("test");
