@@ -56,4 +56,14 @@ class R2dbcConfiguration : AbstractR2dbcConfiguration() {
                 .build()
         )
     }
+
+    @Bean
+    fun initializer(connectionFactory: ConnectionFactory): ConnectionFactoryInitializer {
+        val initializer = ConnectionFactoryInitializer()
+        initializer.setConnectionFactory(connectionFactory)
+        val populator = CompositeDatabasePopulator()
+        populator.addPopulators(ResourceDatabasePopulator(ClassPathResource("./db/migration/V0_1_0__table-email.sql")))
+        initializer.setDatabasePopulator(populator)
+        return initializer
+    }
 }

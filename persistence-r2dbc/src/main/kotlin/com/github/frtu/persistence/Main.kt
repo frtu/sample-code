@@ -1,6 +1,11 @@
 package com.github.frtu.persistence
 
+import com.github.frtu.persistence.r2dbc.Email
+import com.github.frtu.persistence.r2dbc.repository.IEmailRepository
 import com.github.frtu.persistence.r2dbc.R2dbcConfiguration
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.runBlocking
+import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.*
 
 @Configuration
@@ -11,5 +16,15 @@ class AppConfig
 
 fun main() {
     val context = AnnotationConfigApplicationContext(AppConfig::class.java)
-    println(context)
+    val repository: IEmailRepository = context.getBean(IEmailRepository::class.java)
+
+    val entity = Email(
+        "rndfred@gmail.com", "Mail subject",
+        "Lorem ipsum dolor sit amet.", "SENT"
+    )
+    runBlocking {
+        repository.save(entity)
+        println(repository.findAll().toList(mutableListOf()))
+    }
+
 }
