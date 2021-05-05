@@ -14,13 +14,13 @@ import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import org.springframework.stereotype.Repository
 
 @Repository
-class EmailRepository(private val template: R2dbcEntityTemplate) {
+class EmailRepository(private val template: R2dbcEntityTemplate) : IEmailRepository {
     private val queryBuilder: IPostgresJsonbQueryBuilder = PostgresJsonbQueryBuilder(setOf("page", "size"))
 
-    suspend fun findAll(): Flow<Email> = template.select(Email::class.java)
+    override suspend fun findAll(): Flow<Email> = template.select(Email::class.java)
         .all().asFlow()
 
-    suspend fun findAll(searchParams: Map<String, String>, pageable: Pageable? = null): Flow<Email> {
+    override suspend fun findAll(searchParams: Map<String, String>, pageable: Pageable?): Flow<Email> {
         LOGGER.debug("""{"query_type":"criteria", "criteria":"${searchParams}", "limit":${pageable?.pageSize}, "offset":${pageable?.offset}}""")
         return template
             .select(Email::class.java)
@@ -28,7 +28,7 @@ class EmailRepository(private val template: R2dbcEntityTemplate) {
             .all().asFlow()
     }
 
-    suspend fun findById(id: Long): Email {
+    override suspend fun findById(id: Long): Email {
         LOGGER.debug("""{"query_type":"id", "id":"${id}"}""")
         return template
             .selectOne(
