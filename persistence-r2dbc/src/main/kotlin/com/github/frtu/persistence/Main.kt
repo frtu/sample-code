@@ -5,6 +5,7 @@ import com.github.frtu.persistence.r2dbc.repository.IEmailRepository
 import com.github.frtu.persistence.r2dbc.R2dbcConfiguration
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
+import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.context.annotation.*
 
@@ -16,6 +17,8 @@ import org.springframework.context.annotation.*
 class AppConfig
 
 fun main() {
+    val LOGGER = LoggerFactory.getLogger(AppConfig::class.java)
+
     val context = AnnotationConfigApplicationContext(AppConfig::class.java)
     val repository: IEmailRepository = context.getBean(IEmailRepository::class.java)
 
@@ -25,7 +28,7 @@ fun main() {
     )
     runBlocking {
         repository.save(entity)
-        println(repository.findAll().toList(mutableListOf()))
+        LOGGER.debug(repository.findAll().toList(mutableListOf()).toString())
     }
 
 }
