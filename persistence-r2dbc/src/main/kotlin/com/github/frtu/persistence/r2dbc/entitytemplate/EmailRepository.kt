@@ -1,5 +1,6 @@
 package com.github.frtu.persistence.r2dbc.entitytemplate
 
+import com.github.frtu.persistence.exception.DataNotExist
 import com.github.frtu.persistence.r2dbc.Email
 import com.github.frtu.persistence.r2dbc.query.IPostgresJsonbQueryBuilder
 import com.github.frtu.persistence.r2dbc.query.PostgresJsonbQueryBuilder
@@ -27,12 +28,12 @@ class EmailRepository(private val template: R2dbcEntityTemplate) {
             .all().asFlow()
     }
 
-    suspend fun findById(id: Long): Email? {
+    suspend fun findById(id: Long): Email {
         LOGGER.debug("""{"query_type":"id", "id":"${id}"}""")
         return template
             .selectOne(
                 queryBuilder.id(id), Email::class.java
-            ).awaitFirstOrNull()
+            ).awaitFirstOrNull() ?: throw DataNotExist(id.toString())
     }
 
     private val LOGGER: Logger = LoggerFactory.getLogger(EmailRepository::class.java)

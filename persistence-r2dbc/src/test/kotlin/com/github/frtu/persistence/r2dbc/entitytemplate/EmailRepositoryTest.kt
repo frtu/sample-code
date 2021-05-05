@@ -1,5 +1,6 @@
 package com.github.frtu.persistence.r2dbc.entitytemplate
 
+import com.github.frtu.persistence.exception.DataNotExist
 import com.github.frtu.persistence.r2dbc.Email
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -9,6 +10,7 @@ import kotlinx.coroutines.runBlocking
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -41,6 +43,23 @@ internal class EmailRepositoryTest {
 
             // Validate
             assertThat(result).isEqualTo(givenEmail1)
+        }
+    }
+
+    @Test
+    fun `Test non existing findById raise exception`() {
+        // Fixture & mock
+        every {
+            template.selectOne(any(), Email::class.java)
+        } returns Mono.empty()
+
+        // Execution
+        val repository = EmailRepository(template)
+        runBlocking {
+            // Execute & Validate
+            assertThrows<DataNotExist> {
+                repository.findById(99999)
+            }
         }
     }
 
@@ -85,6 +104,6 @@ internal class EmailRepositoryTest {
             assertThat(result[1]).isEqualTo(givenEmail2)
         }
     }
-    
+
     private val LOGGER: Logger = LoggerFactory.getLogger(EmailRepositoryTest::class.java)
 }
