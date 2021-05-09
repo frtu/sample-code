@@ -21,7 +21,12 @@ class PostgresJsonbQueryBuilder(
         return query(criteria, pageable)
     }
 
-    override fun query(criteria: Criteria?, pageable: Pageable?): Query {
+    override fun query(criteriaMap: Map<String, String>, offset: Long?, limit: Int?): Query {
+        val criteria = criteria(criteriaMap)
+        return query(criteria, offset, limit)
+    }
+
+    override fun query(criteria: Criteria, pageable: Pageable?): Query {
         var query = criteria?.let { Query.query(criteria) } ?: Query.empty()
         if (pageable != null && pageable.isPaged) {
             query = query.offset(pageable.offset)
@@ -31,7 +36,15 @@ class PostgresJsonbQueryBuilder(
         return query
     }
 
-    override fun criteria(criteriaMap: Map<String, String>): Criteria? {
+    override fun query(criteria: Criteria, offset: Long?, limit: Int?): Query {
+        var query = Query.query(criteria)
+        LOGGER.debug("""{"offset":${offset}, "limit":${limit}}""")
+        offset ?. let { query = query.offset(offset) }
+        limit ?. let { query = query.limit(limit) }
+        return query
+    }
+
+    override fun criteria(criteriaMap: Map<String, String>): Criteria {
         val criteriaIterator = criteriaMap
             // skip empty key or value
             .filter { it.key != null && it.value != null }
@@ -48,6 +61,6 @@ class PostgresJsonbQueryBuilder(
             }
             LOGGER.debug("""{"query_type":"criteria", criteria":"${criteria}"""")
         }
-        return criteria
+        return criteria ?: Criteria.empty()
     }
 }
