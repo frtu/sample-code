@@ -27,11 +27,10 @@ class PostgresJsonbQueryBuilder(
     }
 
     override fun query(criteria: Criteria, pageable: Pageable?): Query {
-        var query = criteria?.let { Query.query(criteria) } ?: Query.empty()
+        var query = Query.query(criteria)
         if (pageable != null && pageable.isPaged) {
-            query = query.offset(pageable.offset)
-            query = query.limit(pageable.pageSize)
-            LOGGER.debug("""{"limit":${pageable.pageSize}, "offset":${pageable.offset}}""")
+            LOGGER.debug("""{"offset":${pageable.offset}, "limit":${pageable.pageSize}, "sort":"${pageable.sort}"}""")
+            query = query.with(pageable)
         }
         return query
     }

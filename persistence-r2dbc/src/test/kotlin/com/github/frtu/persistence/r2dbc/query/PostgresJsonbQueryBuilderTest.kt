@@ -35,9 +35,14 @@ internal class PostgresJsonbQueryBuilderTest {
                 "key2" to "value2"
             )
         )
-        val criteriaString = criteria.toString()
-        LOGGER.debug("criteria=[$criteriaString]")
-        assertThat(criteriaString).contains("data->>'key1' = 'value1'")
-        assertThat(criteriaString).contains("data->>'key2' = 'value2'")
+        val criteria1 = criteria.previous!!
+        LOGGER.debug("column=[${criteria1.column}] value=[${criteria1.value}]")
+        assertThat(criteria1.column.toString()).isEqualTo("data->>'key1'")
+        assertThat(criteria1.value).isEqualTo("value1")
+
+        val criteria2 = criteria.group[0]
+        LOGGER.debug("column=[${criteria2.column}] value=[${criteria2.value}]")
+        assertThat(criteria2.column.toString()).isEqualTo("data->>'key2'")
+        assertThat(criteria2.value).isEqualTo("value2")
     }
 }
