@@ -18,6 +18,12 @@ class EmailRepository(val template: R2dbcEntityTemplate) {
     private val LOGGER: Logger = LoggerFactory.getLogger(EmailRepository::class.java)
     private val queryBuilder = PostgresJsonbQueryBuilder(setOf("page", "size"))
 
+    suspend fun findAll(): Flow<Email> {
+        LOGGER.debug("""{"query_type":"find_all"}""")
+        return template.select(Email::class.java)
+            .all().asFlow()
+    }
+
     suspend fun findAll(searchParams: Map<String, String>, pageable: Pageable?): Flow<Email> {
         LOGGER.debug("""{"query_type":"criteria", "criteria":"${searchParams}", "limit":${pageable?.pageSize}, "offset":${pageable?.offset}}""")
         return template
