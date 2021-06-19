@@ -87,6 +87,6 @@ pip-log.txt
 .tox
 
 # Project
-event-notification-mails/docker/db/data
+event-notification-mails/docker/storage/db/data
 
 # Others
