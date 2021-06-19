@@ -17,7 +17,5 @@ postgresrm() {
 echo "Type 'startkafka' to start kafka server"
 startkafka() {
   echo "Make sure you have ** docker-compose ** installed !!"
-  (cd docker/kafka/ && exec docker-compose up)
+  (cd docker/broker/ && exec docker-compose up)
 }
-
-startpostgres

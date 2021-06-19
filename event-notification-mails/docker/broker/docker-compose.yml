@@ -4,12 +4,12 @@
 version: '2.1'
 services:
   zookeeper:
-    image: confluentinc/cp-zookeeper:5.0.0-2
+    image: confluentinc/cp-zookeeper:${CONFLUENTINC_PLATFORM_VERSION:-6.2.0}
     hostname: zookeeper
     ports:
       - "2181:2181"
 #      - "38000-39900:38000-39900"
-      - "51100-51500:51100-51500"
+#      - "51100-51500:51100-51500"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -21,7 +21,7 @@ services:
       retries: 3
 
   broker:
-    image: confluentinc/cp-kafka:5.0.0-2
+    image: confluentinc/cp-kafka:${CONFLUENTINC_PLATFORM_VERSION:-6.2.0}
     hostname: broker
     depends_on:
       zookeeper: { condition: service_healthy }
@@ -52,7 +52,7 @@ services:
       retries: 3
 
   schema_registry:
-    image: confluentinc/cp-schema-registry:5.0.0-1
+    image: confluentinc/cp-schema-registry:${CONFLUENTINC_PLATFORM_VERSION:-6.2.0}
     hostname: schema_registry
     depends_on:
       broker: { condition: service_healthy }
@@ -80,7 +80,7 @@ services:
 # https://github.com/confluentinc/kafka-rest
 # CORS PARAMS : https://github.com/apache/kafka/commit/eb823281a52f3b27c3a889e7412bc07b3024e688
   kafka_rest:
-    image: confluentinc/cp-kafka-rest:5.0.0-1
+    image: confluentinc/cp-kafka-rest:${CONFLUENTINC_PLATFORM_VERSION:-6.2.0}
     hostname: kafka_rest
     depends_on:
       - zookeeper
