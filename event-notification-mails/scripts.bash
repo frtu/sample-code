@@ -13,4 +13,11 @@ postgresrm() {
     rm -Rf docker/storage/db/data/
 }
 
+# Copied from https://github.com/frtu/governance-toolbox/tree/master/schema-registries/docker/confluentinc-schema-registry
+echo "Type 'startkafka' to start kafka server"
+startkafka() {
+  echo "Make sure you have ** docker-compose ** installed !!"
+  (cd docker/kafka/ && exec docker-compose up)
+}
+
 startpostgres
