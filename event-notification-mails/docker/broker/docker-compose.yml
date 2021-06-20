@@ -1,19 +1,21 @@
 # http://docs.confluent.io/current/cp-docker-images/docs/configuration.html
 # https://docs.confluent.io/current/installation/docker/docs/config-reference.html
 ---
-version: '2.1'
+version: '3.7'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:${CONFLUENTINC_PLATFORM_VERSION:-6.2.0}
     hostname: zookeeper
     ports:
-      - "2181:2181"
-#      - "38000-39900:38000-39900"
-#      - "51100-51500:51100-51500"
+      - 2181:2181
+#      - 38000-39900:38000-39900
+#      - 51100-51500:51100-51500
     environment:
+      ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
 #      ZOOKEEPER_SYNC_LIMIT: 2
+#      ZOOKEEPER_SERVERS: "zookeeper:22888:23888"
     healthcheck:
       test: ["CMD", "nc", "-z", "localhost", "2181"]
       interval: 10s
@@ -26,8 +28,8 @@ services:
     depends_on:
       zookeeper: { condition: service_healthy }
     ports:
-      - "9092:9092"
-      - "9093:9093"
+      - 9092:9092
+      - 9093:9093
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
@@ -37,6 +39,7 @@ services:
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       # Comment for manual creation
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_DELETE_TOPIC_ENABLE: "true"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
 #      KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
@@ -57,7 +60,7 @@ services:
     depends_on:
       broker: { condition: service_healthy }
     ports:
-      - "8081:8081"
+      - 8081:8081
     environment:
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
       SCHEMA_REGISTRY_HOST_NAME: schema_registry
@@ -68,7 +71,7 @@ services:
    image: landoop/schema-registry-ui:0.9.5
    hostname: schema_registry_ui
    ports:
-     - "8001:8001"
+     - 8001:8001
    environment:
       PORT: 8001
       PROXY: 'true'
@@ -87,7 +90,7 @@ services:
       - broker
       - schema_registry
     ports:
-      - "8082:8082"
+      - 8082:8082
 #    volumes:
 #      - ./config/kafka-rest/:/etc/kafka-rest/
     environment:
@@ -115,7 +118,7 @@ services:
       - schema_registry
       - kafka_rest
     ports:
-      - "8002:8002"
+      - 8002:8002
     environment:
       PORT: 8002
       PROXY_SKIP_VERIFY: 'true'

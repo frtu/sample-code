@@ -5,7 +5,7 @@ application:
   name: event-notification-mails-publisher
   topic:
     # Where email request is consumed
-    email-source: email_source
+    email-source: "email-source"
 
 # ======================================
 # Spring Boot

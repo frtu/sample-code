@@ -30,7 +30,9 @@ class ProducerEmailSourceApplication {
 
     @Bean
     fun runner(kafkaTemplate: KafkaTemplate<String?, String?>): ApplicationRunner? {
-        return ApplicationRunner { args: ApplicationArguments? -> kafkaTemplate.send(outputSource, "email_message") }
+        return ApplicationRunner { args: ApplicationArguments? ->
+            kafkaTemplate.send(outputSource, "email_message")
+        }
     }
 }
 

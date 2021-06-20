@@ -26,19 +26,22 @@
     </properties>
 
     <dependencies>
+        <!--===========================-->
+        <!-- Spring-boot platform -->
+        <!--===========================-->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
             <version>${spring-kafka.version}</version>
         </dependency>
-        <!--===========================-->
-        <!-- ASYNCHRONOUS-->
-        <!--===========================-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
+        <!--===========================-->
+        <!-- Kotlin platform -->
+        <!--===========================-->
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
