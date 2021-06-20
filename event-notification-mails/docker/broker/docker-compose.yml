@@ -125,3 +125,13 @@ services:
       PROXY: 'true'
       KAFKA_REST_PROXY_URL: 'http://kafka_rest:8082'
       SCHEMAREGISTRY_UI_URL: http://schema_registry:8081
+
+  rabbitmq:
+    image: rabbitmq:${RABBITMQ_PLATFORM_VERSION:-3.8.14-management}
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    ports:
+      - 5672:5672
+      - 15672:15672
