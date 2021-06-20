@@ -1,16 +1,17 @@
 package com.github.frtu.mail
 
+import com.github.frtu.mail.channel.EmailResultChannel
+import com.github.frtu.mail.channel.EmailSourceChannel
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.stream.annotation.EnableBinding
 import org.springframework.cloud.stream.annotation.StreamListener
-import org.springframework.cloud.stream.messaging.Sink
 
 
 @SpringBootApplication
-@EnableBinding(Sink::class)
+@EnableBinding(EmailSourceChannel::class, EmailResultChannel::class)
 class ApplicationChannel {
-    @StreamListener(Sink.INPUT)
+    @StreamListener(EmailSourceChannel.EMAIL_SOURCE)
     fun handle(message: String) {
         println("Received: $message")
     }

@@ -23,6 +23,16 @@ spring:
         input:
           destination: ${application.topic.email-source}
           group: email_events
+        # email event topic
+        email-source:
+          destination: ${application.topic.email-source}
+          group: email_events
+        #          producer:
+        #            partition-count: 10
+        # email result topic
+        email-result:
+          destination: ${application.topic.email-result}
+          group: email-events
 
       kafka:
         binder:
