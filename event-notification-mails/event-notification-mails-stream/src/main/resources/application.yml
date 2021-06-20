@@ -2,9 +2,9 @@
 # TOPOLOGY and EXTERNAL DEPENDENCIES
 # ======================================
 application:
-  name: event-notification-mails-publisher
+  name: event-notification-mails-stream
   topic:
-    # Where email request is consumed
+    # Where email request is consumed : ATTENTION please put between double quote to avoid ASCII check error
     email-source: "email-source"
     # Where email result is published
     email-result: "email-result"
@@ -16,14 +16,31 @@ spring:
   application:
     name: ${application.name}
 
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        input:
+          destination: ${application.topic.email-source}
+          group: email_events
+
+      kafka:
+        binder:
+          auto-create-topics: true
+
   kafka:
     bootstrap-servers: ${KAFKA_BROKERS:localhost:9092}
     consumer:
+      #      group-id: consumer_1
+      #      auto-offset-reset: earliest
+      #      enable-auto-commit: false
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  #    listener:
+  #      ack-mode: record
 
 # ======================================
 # Management
