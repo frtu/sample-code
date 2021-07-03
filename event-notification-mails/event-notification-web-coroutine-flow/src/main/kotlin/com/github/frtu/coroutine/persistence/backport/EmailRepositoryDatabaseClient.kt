@@ -64,7 +64,7 @@ class EmailRepositoryDatabaseClient(
                 statement
                     .bind("id", id)
                     .bind("creation_time", entity.creationTime)
-                    .bind("data", objectMapper.writeValueAsString(entity))
+                    .bind("data", entity.data)
                     .add()
             }
 

@@ -90,3 +90,4 @@ pip-log.txt
 event-notification-mails/docker/storage/db/data
 
 # Others
+event-notification-mails/docker/db/data

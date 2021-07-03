@@ -26,14 +26,14 @@ class EmailRepositoryBatch(private val client: DatabaseClient) {
                                 (id, creation_time, "data") 
                                 VALUES($1, $2, $3::JSON)
                 """.trimMargin()
-            ).returnGeneratedValues("safasaid")
+            ).returnGeneratedValues("id")
 
             for (entity in data) {
                 val id = entity.identity!!
                 statement
                     .bind(0, id)
                     .bind(1, entity.creationTime)
-                    .bind(2, EmailRepositoryDatabaseClient.objectMapper.writeValueAsString(entity))
+                    .bind(2, entity.data)
                     .add()
             }
 

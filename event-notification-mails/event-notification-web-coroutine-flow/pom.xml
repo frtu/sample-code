@@ -18,8 +18,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <base-pom.version>1.1.5</base-pom.version>
-        <frtu.logger.version>1.1.1-SNAPSHOT</frtu.logger.version>
+        <base-pom.version>1.1.6</base-pom.version>
+        <frtu.logger.version>1.1.2</frtu.logger.version>
         <!-- https://search.maven.org/artifact/org.springdoc/springdoc-openapi-ui/1.5.4/jar -->
         <springdoc.version>1.5.4</springdoc.version>
         <!--===========================-->
