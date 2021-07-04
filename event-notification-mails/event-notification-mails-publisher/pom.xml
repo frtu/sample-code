@@ -46,6 +46,10 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+        </dependency>
 
         <!-- UNCOMMMENT FOR coroutine - https://kotlinlang.org/docs/tutorials/coroutines/async-programming.html -->
         <!--<dependency>-->
