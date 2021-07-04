@@ -7,11 +7,13 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.kafka.annotation.EnableKafka
 import org.springframework.kafka.test.context.EmbeddedKafka
 import org.springframework.test.annotation.DirtiesContext
 import java.util.concurrent.TimeUnit
 
 @SpringBootApplication
+@EnableKafka
 class ApplicationTest
 
 /**
@@ -33,7 +35,7 @@ class EmbeddedKafkaIntegrationTest {
     fun givenEmbeddedKafkaBroker_whenSendingtoSimpleProducer_thenMessageReceived() {
         producer.send("Sending with own simple KafkaProducer")
         consumer.latch.await(10000, TimeUnit.MILLISECONDS)
-        assertThat(consumer.latch.count).isEqualTo(1L)
+        assertThat(consumer.latch.count).isEqualTo(0L)
         assertThat(consumer.payload).contains(producer.outputSource)
     }
 }
