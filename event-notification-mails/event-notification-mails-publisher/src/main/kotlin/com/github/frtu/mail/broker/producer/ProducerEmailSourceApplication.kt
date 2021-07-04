@@ -22,7 +22,7 @@ class ProducerEmailSourceApplication {
     @Bean
     fun topicEmailSource(): NewTopic? {
         return TopicBuilder.name(producerEmailSource.outputSource)
-            .partitions(10)
+            .partitions(1)
             .replicas(1)
             .build()
     }

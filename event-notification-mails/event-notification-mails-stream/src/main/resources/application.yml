@@ -27,8 +27,8 @@ spring:
         email-source:
           destination: ${application.topic.email-source}
           group: email_events
+          contentType: application/json
           useNativeDecoding: true
-        #          contentType: application/json
           consumer:
             max-attempts: 1
             autoCommitOffset: true
