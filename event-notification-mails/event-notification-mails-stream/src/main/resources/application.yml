@@ -29,6 +29,10 @@ spring:
           group: email_events
           useNativeDecoding: true
         #          contentType: application/json
+          consumer:
+            max-attempts: 1
+            autoCommitOffset: true
+            autoCommitOnError: false
 
         #          producer:
         #            partition-count: 10
