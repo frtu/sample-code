@@ -1,21 +1,12 @@
 package com.github.frtu.mail.broker
 
-import com.github.frtu.mail.broker.channel.EmailResultChannel
-import com.github.frtu.mail.broker.channel.EmailSourceChannel
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.cloud.stream.annotation.EnableBinding
-import org.springframework.cloud.stream.annotation.StreamListener
-
+import org.springframework.context.annotation.ComponentScan
 
 @SpringBootApplication
-@EnableBinding(EmailSourceChannel::class, EmailResultChannel::class)
-class ApplicationChannel {
-    @StreamListener(EmailSourceChannel.EMAIL_SOURCE)
-    fun handle(message: String) {
-        println("Received: $message")
-    }
-}
+@ComponentScan("com.github.frtu.mail.broker.consumer")
+class ApplicationChannel
 
 fun main(args: Array<String>) {
     runApplication<ApplicationChannel>(*args)
