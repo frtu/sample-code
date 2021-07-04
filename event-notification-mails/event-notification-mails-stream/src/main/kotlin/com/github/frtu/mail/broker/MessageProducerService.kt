@@ -1,4 +1,4 @@
-package com.github.frtu.mail
+package com.github.frtu.mail.broker
 
 import org.springframework.integration.support.MessageBuilder
 import org.springframework.messaging.Message

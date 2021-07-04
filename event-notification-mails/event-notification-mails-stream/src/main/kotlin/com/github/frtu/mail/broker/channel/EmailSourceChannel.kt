@@ -1,4 +1,4 @@
-package com.github.frtu.mail.channel
+package com.github.frtu.mail.broker.channel
 
 import org.springframework.cloud.stream.annotation.Input
 import org.springframework.cloud.stream.annotation.Output

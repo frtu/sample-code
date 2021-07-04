@@ -1,4 +1,4 @@
-package com.github.frtu.mail
+package com.github.frtu.mail.broker
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll

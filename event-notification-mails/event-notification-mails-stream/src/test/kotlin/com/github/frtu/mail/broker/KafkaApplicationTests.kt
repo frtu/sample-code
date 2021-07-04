@@ -1,4 +1,4 @@
-package com.github.frtu.mail
+package com.github.frtu.mail.broker
 
 //import org.junit.Test
 //import org.junit.runner.RunWith
