@@ -27,6 +27,9 @@ spring:
         email-source:
           destination: ${application.topic.email-source}
           group: email_events
+          useNativeDecoding: true
+        #          contentType: application/json
+
         #          producer:
         #            partition-count: 10
         # email result topic
