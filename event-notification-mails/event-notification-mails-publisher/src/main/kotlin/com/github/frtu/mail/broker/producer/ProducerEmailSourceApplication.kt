@@ -1,4 +1,4 @@
-package com.github.frtu.mail.producer
+package com.github.frtu.mail.broker.producer
 
 import org.apache.kafka.clients.admin.NewTopic
 import org.slf4j.LoggerFactory

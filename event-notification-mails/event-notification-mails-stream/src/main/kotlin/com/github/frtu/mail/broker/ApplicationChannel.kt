@@ -1,7 +1,7 @@
-package com.github.frtu.mail
+package com.github.frtu.mail.broker
 
-import com.github.frtu.mail.channel.EmailResultChannel
-import com.github.frtu.mail.channel.EmailSourceChannel
+import com.github.frtu.mail.broker.channel.EmailResultChannel
+import com.github.frtu.mail.broker.channel.EmailSourceChannel
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.cloud.stream.annotation.EnableBinding

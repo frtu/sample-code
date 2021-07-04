@@ -1,4 +1,4 @@
-package com.github.frtu.mail.consumer
+package com.github.frtu.mail.broker.consumer
 
 import org.apache.kafka.clients.admin.NewTopic
 import org.apache.kafka.clients.consumer.ConsumerRecord
