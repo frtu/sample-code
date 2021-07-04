@@ -1,6 +1,7 @@
 package com.github.frtu.mail.consumer
 
 import org.apache.kafka.clients.admin.NewTopic
+import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.LoggerFactory
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -30,6 +31,10 @@ class ConsumerEmailSourceApplication {
     }
 
     @KafkaListener(id = "consumer-1", topics = [inputSource])
+    fun listen(consumerRecord: ConsumerRecord<Any, Any>) {
+        listen(consumerRecord.toString())
+    }
+
     fun listen(input: String) {
         logger.info("received payload='{}'", input);
     }
