@@ -17,12 +17,24 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <properties>
+        <logger-bom.version>1.1.2</logger-bom.version>
+        <testcontainers.version>1.15.3</testcontainers.version> <!-- 2021-04-15 -->
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.github.frtu.logs</groupId>
                 <artifactId>logger-bom</artifactId>
-                <version>1.1.2</version>
+                <version>${logger-bom.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

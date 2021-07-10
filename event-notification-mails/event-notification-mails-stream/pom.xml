@@ -40,6 +40,8 @@
         <kotlin.plugin.dep>kotlin-maven-noarg</kotlin.plugin.dep>
         <!-- <kotlin.plugin.dep>kotlin-maven-sam-with-receiver</kotlin.plugin.dep>-->
         <!-- <kotlin.mode>sam-with-receiver</kotlin.mode>-->
+        <!--===========================-->
+        <testcontainers.version>1.15.3</testcontainers.version> <!-- 2021-04-15 -->
     </properties>
 
     <dependencies>
@@ -554,6 +556,13 @@
                 <groupId>com.github.frtu.logs</groupId>
                 <artifactId>logger-bom</artifactId>
                 <version>${frtu.logger.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
