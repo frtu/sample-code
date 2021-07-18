@@ -23,6 +23,10 @@ spring:
   application:
     name: ${application.name}
 
+  redis:
+    hostname: localhost
+    port: 6379
+
 # ======================================
 # Management
 # ======================================
