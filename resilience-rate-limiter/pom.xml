@@ -22,6 +22,8 @@
         <springdoc.version>1.5.4</springdoc.version>
         <!--<frtu.tools.version>1.0.2</frtu.tools.version>-->
         <!--===========================-->
+        <!-- https://resilience4j.readme.io/docs/getting-started-3 -->
+        <resilience4j.version>1.7.1</resilience4j.version> <!-- 2021-06-25 -->
         <javax.persistence-api.version>2.2</javax.persistence-api.version>
         <r2dbc.version>Arabba-SR9</r2dbc.version>
         <!--===========================-->
@@ -41,6 +43,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot2</artifactId>
+            <version>${resilience4j.version}</version>
+        </dependency>
         <!--===========================-->
         <!-- APIs -->
         <!--===========================-->
