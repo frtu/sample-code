@@ -5,24 +5,14 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.runApplication
-import org.springframework.cloud.stream.annotation.EnableBinding
-import org.springframework.cloud.stream.annotation.StreamListener
-import org.springframework.cloud.stream.messaging.Sink
 import org.springframework.context.annotation.Bean
 import org.springframework.integration.config.EnableIntegration
 
-
 @EnableConfigurationProperties(AppProperties::class)
 @SpringBootApplication
-@EnableBinding(Sink::class)
 @EnableIntegration
 //@EnableR2dbcRepositories
 class Application {
-    @StreamListener(Sink.INPUT)
-    fun handle(message: String) {
-        println("Received: $message")
-    }
-
     @Bean
     fun initializer(): CommandLineRunner =
         CommandLineRunner { args: Array<String?> ->
