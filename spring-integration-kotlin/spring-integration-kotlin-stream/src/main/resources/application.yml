@@ -1,0 +1,70 @@
+# ======================================
+# TOPOLOGY and EXTERNAL DEPENDENCIES
+# ======================================
+application:
+  name: spring-integration-kotlin-stream
+  topic:
+    # Where integration request is consumed : ATTENTION please put between double quote to avoid ASCII check error
+    integration-source: "domain-source"
+    # Where integration result is published
+    integration-result: "domain-result"
+
+prefix:
+  key1: value1
+
+# ======================================
+# Spring Boot
+# ======================================
+spring:
+  application:
+    name: ${application.name}
+
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        input:
+          destination: ${application.topic.domain-source}
+          group: integration_events
+        # integration source topic
+        integration-source:
+          destination: ${application.topic.domain-source}
+          group: integration_events
+        # integration result topic
+        integration-result:
+          destination: ${application.topic.domain-result}
+          group: integration_events
+      kafka:
+        binder:
+          auto-create-topics: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: admin
+#    password: admin
+
+# ======================================
+# Management
+# ======================================
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+info:
+  app:
+    name: ${application.name}
