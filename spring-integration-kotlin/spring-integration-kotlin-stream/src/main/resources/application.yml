@@ -24,15 +24,15 @@ spring:
       default-binder: kafka
       bindings:
         input:
-          destination: ${application.topic.domain-source}
+          destination: ${application.topic.integration-source}
           group: integration_events
         # integration source topic
         integration-source:
-          destination: ${application.topic.domain-source}
+          destination: ${application.topic.integration-source}
           group: integration_events
         # integration result topic
         integration-result:
-          destination: ${application.topic.domain-result}
+          destination: ${application.topic.integration-result}
           group: integration_events
       kafka:
         binder:
