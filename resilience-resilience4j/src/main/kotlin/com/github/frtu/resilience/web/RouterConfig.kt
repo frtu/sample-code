@@ -1,29 +1,22 @@
 package com.github.frtu.resilience.web
 
 import com.github.frtu.coroutine.webclient.SuspendableWebClient
-import com.github.frtu.logs.core.RpcLogger
-import com.github.frtu.logs.core.RpcLogger.requestBody
-import com.github.frtu.logs.core.RpcLogger.responseBody
-import com.github.frtu.logs.core.RpcLogger.uri
-import io.netty.handler.codec.http.HttpResponseStatus
-import kotlinx.coroutines.reactive.asFlow
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
-import java.net.URI
-import java.util.UUID
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.reactive.function.server.*
-import reactor.core.publisher.Flux
+import org.springframework.web.reactive.function.server.bodyAndAwait
+import org.springframework.web.reactive.function.server.coRouter
+import org.springframework.web.reactive.function.server.json
 import javax.annotation.PreDestroy
 
 @Configuration
 class RouterConfig {
     @Bean
-    fun route(resilientBridge: ResilientBridge): RouterFunction<*> = coRouter {
-        GET("/") { serverRequest ->
-            ok().json().bodyAndAwait(resilientBridge.query())
+    fun route(resilientBridge: ResilientBridge) = coRouter {
+        GET("/nonblocking") { serverRequest ->
+            ok().json().bodyAndAwait(resilientBridge.nonBlockingQuery())
         }
     }
 
@@ -44,9 +37,9 @@ class RouterConfig {
 
             for (index in 1..10) {
                 // Simulate 2 errors
-                for (index in 1..2) {
-                    mockWebServer.enqueue(MockResponse().setResponseCode(HttpResponseStatus.SERVICE_UNAVAILABLE.code()))
-                }
+//                for (index in 1..2) {
+//                    mockWebServer.enqueue(MockResponse().setResponseCode(HttpResponseStatus.SERVICE_UNAVAILABLE.code()))
+//                }
                 // Before returning the correct response
                 val responseBody = """{"message":"response"}"""
                 mockWebServer.enqueue(
@@ -67,4 +60,6 @@ class RouterConfig {
 
         internal val logger = LoggerFactory.getLogger(this::class.java)
     }
+
+    internal val logger = LoggerFactory.getLogger(this::class.java)
 }

@@ -13,6 +13,9 @@ prefix:
 spring:
   application:
     name: ${application.name}
+  main:
+    # SERVLET or REACTIVE
+    web-application-type: REACTIVE
 
 # ======================================
 # Management
