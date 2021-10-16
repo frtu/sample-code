@@ -40,9 +40,16 @@
         <kotlin.plugin.dep>kotlin-maven-noarg</kotlin.plugin.dep>
         <!-- <kotlin.plugin.dep>kotlin-maven-sam-with-receiver</kotlin.plugin.dep>-->
         <!-- <kotlin.mode>sam-with-receiver</kotlin.mode>-->
+        <!--=========================== -->
+        <okhttp.version>4.0.1</okhttp.version> <!-- This version auto flush logs -->
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.frtu.libs</groupId>
+            <artifactId>lib-webclient</artifactId>
+        </dependency>
+
         <!--===========================-->
         <!-- APIs -->
         <!--===========================-->
@@ -257,6 +264,17 @@
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <version>${okhttp.version}</version>
         </dependency>
 
         <!--===========================-->
