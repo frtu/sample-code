@@ -10,6 +10,15 @@ prefix:
 # ======================================
 # Spring Boot
 # ======================================
+resilience4j:
+  retry:
+    instances:
+      bridge:
+        maxRetryAttempts: 3
+        waitDuration: 250ms
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+
 spring:
   application:
     name: ${application.name}

@@ -1,6 +1,7 @@
 package com.github.frtu.resilience.web
 
 import com.github.frtu.coroutine.webclient.SuspendableWebClient
+import io.netty.handler.codec.http.HttpResponseStatus
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.slf4j.LoggerFactory
@@ -37,9 +38,9 @@ class RouterConfig {
 
             for (index in 1..10) {
                 // Simulate 2 errors
-//                for (index in 1..2) {
-//                    mockWebServer.enqueue(MockResponse().setResponseCode(HttpResponseStatus.SERVICE_UNAVAILABLE.code()))
-//                }
+                for (index in 1..2) {
+                    mockWebServer.enqueue(MockResponse().setResponseCode(HttpResponseStatus.SERVICE_UNAVAILABLE.code()))
+                }
                 // Before returning the correct response
                 val responseBody = """{"message":"response"}"""
                 mockWebServer.enqueue(
