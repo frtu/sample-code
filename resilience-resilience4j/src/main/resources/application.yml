@@ -38,8 +38,12 @@ management:
     web:
       exposure:
         include:
-          - info
           - health
+          - info
+          - metrics
+          - prometheus
+          - retry
+          - retryevents
 info:
   app:
     name: ${application.name}
