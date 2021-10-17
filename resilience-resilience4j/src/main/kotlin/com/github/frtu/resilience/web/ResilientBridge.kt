@@ -2,6 +2,7 @@ package com.github.frtu.resilience.web
 
 import com.github.frtu.coroutine.webclient.SuspendableWebClient
 import com.github.frtu.coroutine.webclient.WebClientResponse
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker
 import io.github.resilience4j.retry.annotation.Retry
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
@@ -25,6 +26,7 @@ class ResilientBridge(private val suspendableWebClient: SuspendableWebClient) {
     suspend fun nonBlockingQuery() = suspendableWebClient.get("/")
 
     @Retry(name = "bridge")
+    @CircuitBreaker(name = "bridge")
     fun blockingPost(requestId: UUID): WebClientResponse {
         logger.debug("start ${ZonedDateTime.now()}")
         val result = runBlocking {
@@ -35,6 +37,7 @@ class ResilientBridge(private val suspendableWebClient: SuspendableWebClient) {
     }
 
     @Retry(name = "bridge")
+    @CircuitBreaker(name = "bridge")
     suspend fun nonBlockingPost(requestId: UUID): WebClientResponse {
         var response = WebClientResponse(HttpStatus.PROCESSING, null)
         suspendableWebClient.post(

@@ -20,6 +20,23 @@ resilience4j.retry:
       exponentialBackoffMultiplier: 2
       resultPredicate: com.github.frtu.resilience.retry.RetryPredicate
 
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowType: COUNT_BASED              # Based on number of occurence only
+      minimumNumberOfCalls: 100                   #The number of calls after which the error rate is calculated. I have assigned it with a small value for test purpose.
+      failureRateThreshold: 60                    #The Threshold Percentage Above Which the Circuit Breaker will move from Closed to Open State.
+      waitDurationInOpenState: 10000              #Time in milliseconds, in which the circuit breaker is to stay in open state before moving to half-open state
+      permittedNumberOfCallsInHalfOpenState: 10
+      eventConsumerBufferSize: 10
+      registerHealthIndicator: true
+  instances:
+    bridge:
+      baseConfig: default
+      waitDurationInOpenState: 5000
+      minimumNumberOfCalls: 2                     #The number of calls after which the error rate is calculated. I have assigned it with a small value for test purpose.
+      slidingWindowSize: 3
+
 spring:
   application:
     name: ${application.name}
@@ -44,6 +61,10 @@ management:
           - prometheus
           - retry
           - retryevents
+          - circuitbreakers
+          - circuitbreakerevents
+#          - '*'
+
 info:
   app:
     name: ${application.name}
