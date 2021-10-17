@@ -39,13 +39,17 @@ class RouterConfig {
             for (index in 1..10) {
                 // Simulate 2 errors
                 for (index in 1..2) {
-                    mockWebServer.enqueue(MockResponse().setResponseCode(HttpResponseStatus.SERVICE_UNAVAILABLE.code()))
+                    mockWebServer.enqueue(
+                        MockResponse()
+                            .setBody("""{"message":"response", "success":"false"}""")
+                            .addHeader("Content-Type", "application/json")
+                    )
+//                    mockWebServer.enqueue(MockResponse().setResponseCode(HttpResponseStatus.SERVICE_UNAVAILABLE.code()))
                 }
                 // Before returning the correct response
-                val responseBody = """{"message":"response"}"""
                 mockWebServer.enqueue(
                     MockResponse()
-                        .setBody(responseBody)
+                        .setBody("""{"message":"response", "success":"true"}""")
                         .addHeader("Content-Type", "application/json")
                 )
             }
