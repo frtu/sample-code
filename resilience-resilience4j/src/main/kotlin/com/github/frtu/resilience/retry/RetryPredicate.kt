@@ -1,4 +1,4 @@
-package com.github.frtu.resilience.web
+package com.github.frtu.resilience.retry
 
 import com.github.frtu.coroutine.webclient.WebClientResponse
 import org.slf4j.LoggerFactory

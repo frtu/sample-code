@@ -1,7 +1,7 @@
-package com.github.frtu.resilience.web
+package com.github.frtu.resilience.config
 
 import com.github.frtu.coroutine.webclient.SuspendableWebClient
-import io.netty.handler.codec.http.HttpResponseStatus
+import com.github.frtu.resilience.web.ResilientBridge
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.slf4j.LoggerFactory

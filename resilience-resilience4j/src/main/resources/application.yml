@@ -18,7 +18,7 @@ resilience4j:
         waitDuration: 250ms
         enableExponentialBackoff: true
         exponentialBackoffMultiplier: 2
-        resultPredicate: com.github.frtu.resilience.web.RetryPredicate
+        resultPredicate: com.github.frtu.resilience.retry.RetryPredicate
 
 spring:
   application:
