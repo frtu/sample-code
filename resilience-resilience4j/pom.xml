@@ -42,6 +42,7 @@
         <!-- <kotlin.mode>sam-with-receiver</kotlin.mode>-->
         <!--=========================== -->
         <okhttp.version>4.0.1</okhttp.version> <!-- This version auto flush logs -->
+        <resilience4j.version>1.7.0</resilience4j.version> <!-- 2021-01-25 -->
     </properties>
 
     <dependencies>
@@ -52,7 +53,10 @@
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-spring-boot2</artifactId>
-            <version>1.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-reactor</artifactId>
         </dependency>
 
         <!--===========================-->
@@ -619,6 +623,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>io.github.resilience4j</groupId>
+                <artifactId>resilience4j-bom</artifactId>
+                <version>${resilience4j.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
             <!-- Spring Boot and Platform -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
