@@ -1,6 +1,6 @@
 package com.github.frtu.sample.integration
 
-import com.github.frtu.kotlin.utils.BeanHelper
+import com.github.frtu.kotlin.utils.io.ResourceHelper
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
@@ -59,7 +59,7 @@ internal class BaseTest {
         //--------------------------------------
         // 1. Init
         //--------------------------------------
-        val text = BeanHelper().readFromFile("classpath:data/sample.txt")
+        val text = ResourceHelper().readFromFile("classpath:data/sample.txt")
         //--------------------------------------
         // 3. Validate
         //--------------------------------------

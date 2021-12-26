@@ -17,12 +17,12 @@ class IntegrationTests(@Autowired val restTemplate: TestRestTemplate) {
         println(">> Setup")
     }
 
-    @Test
-    fun `Assert url and status code`() {
-        println(">> Assert url and status code")
-        val entity = restTemplate.getForEntity<String>("/v1/resources/1234")
-        assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
-    }
+//    @Test
+//    fun `Assert url and status code`() {
+//        println(">> Assert url and status code")
+//        val entity = restTemplate.getForEntity<String>("/v1/resources/1234")
+//        assertThat(entity.statusCode).isEqualTo(HttpStatus.OK)
+//    }
 
     @AfterAll
     fun teardown() {

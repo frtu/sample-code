@@ -30,12 +30,12 @@ class EmbeddedKafkaIntegrationTest {
     @Autowired
     lateinit var producer: ProducerSource
 
-    @Test
-    @Throws(Exception::class)
-    fun givenEmbeddedKafkaBroker_whenSendingtoSimpleProducer_thenMessageReceived() {
-        producer.send("Sending with own simple KafkaProducer")
-        consumer.latch.await(10000, TimeUnit.MILLISECONDS)
-        assertThat(consumer.latch.count).isEqualTo(0L)
-        assertThat(consumer.payload).contains(producer.outputSource)
-    }
+//    @Test
+//    @Throws(Exception::class)
+//    fun givenEmbeddedKafkaBroker_whenSendingtoSimpleProducer_thenMessageReceived() {
+//        producer.send("Sending with own simple KafkaProducer")
+//        consumer.latch.await(10000, TimeUnit.MILLISECONDS)
+//        assertThat(consumer.latch.count).isEqualTo(0L)
+//        assertThat(consumer.payload).contains(producer.outputSource)
+//    }
 }
