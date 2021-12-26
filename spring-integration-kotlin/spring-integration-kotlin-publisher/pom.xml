@@ -17,13 +17,6 @@
         <!-- <java.version>1.8</java.version>-->
         <!--===========================-->
         <spring-kafka.version>2.6.6</spring-kafka.version>
-        <!--===========================-->
-        <!--https://kotlinlang.org/docs/reference/using-maven.html-->
-        <kotlin.version>1.4.32</kotlin.version>
-        <kotlinx.coroutines.version>1.4.3</kotlinx.coroutines.version>
-        <kotlin.test.version>3.4.2</kotlin.test.version>
-        <!--CHECK FOR COMPILER PROPS : https://kotlinlang.org/docs/reference/using-maven.html#attributes-common-for-jvm-and-js-->
-        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
     </properties>
 
     <dependencies>
