@@ -6,6 +6,11 @@ Simple kotlin spring-boot project for activiti workflow
 
 ## API
 
+### Sync with WebMVC
+
+* Access Swagger API at [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+* Access API Docs (JSON) at [http://localhost:8080/v3/api-docs/](http://localhost:8080/v3/api-docs/)
+
 ## Integration with Docker
 
 Build your Docker image at ```mvn verify``` phase
