@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*
 import java.util.stream.Collectors
 
 @RestController
-@RequestMapping("/process")
+@RequestMapping("/processes")
 class ProcessController(
     val runtimeService: RuntimeService,
     val repositoryService: RepositoryService,
@@ -52,8 +52,11 @@ class ProcessController(
             .list()
     }
 
-    @GetMapping("{processInstanceId}/complete")
-    fun complete(@PathVariable processInstanceId: String) {
+    @PostMapping("{processInstanceId}/complete")
+    fun complete(
+        @PathVariable processInstanceId: String,
+        @RequestBody assignee: String
+    ) {
         val task = taskService.createTaskQuery()
             .processInstanceId(processInstanceId)
             .singleResult()
