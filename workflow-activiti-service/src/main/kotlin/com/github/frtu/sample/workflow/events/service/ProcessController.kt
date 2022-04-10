@@ -27,7 +27,7 @@ class ProcessController(
     fun startProcess(@RequestBody assignee: String): String {
         val variables: MutableMap<String, Any> = HashMap()
         variables["assignee"] = assignee
-        val processInstance = runtimeService.startProcessInstanceByKey("myProcess", variables)
+        val processInstance = runtimeService.startProcessInstanceByKey(PROCESS_NAME, variables)
         return ("Process [${processInstance.id}] started! Nb process instances = ${
             runtimeService.createProcessInstanceQuery().count()
         }")
@@ -64,5 +64,8 @@ class ProcessController(
         logger.info("Task completed")
     }
 
-    private val logger = LoggerFactory.getLogger(this::class.java)
+    companion object {
+        const val PROCESS_NAME = "myProcess"
+        private val logger = LoggerFactory.getLogger(this::class.java)
+    }
 }
