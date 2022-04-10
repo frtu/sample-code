@@ -1,0 +1,70 @@
+# ======================================
+# TOPOLOGY and EXTERNAL DEPENDENCIES
+# ======================================
+application:
+  name: workflow-activiti-event-driven-stream
+  topic:
+    # Where domain request is consumed : ATTENTION please put between double quote to avoid ASCII check error
+    domain-source: "domain-source"
+    # Where domain result is published
+    domain-result: "domain-result"
+
+prefix:
+  key1: value1
+
+# ======================================
+# Spring Boot
+# ======================================
+spring:
+  application:
+    name: ${application.name}
+
+  cloud:
+    stream:
+      default-binder: kafka
+      bindings:
+        input:
+          destination: ${application.topic.domain-source}
+          group: domain_events
+        # domain source topic
+        domain-source:
+          destination: ${application.topic.domain-source}
+          group: domain_events
+        # domain result topic
+        domain-result:
+          destination: ${application.topic.domain-result}
+          group: domain_events
+      kafka:
+        binder:
+          auto-create-topics: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: admin
+#    password: admin
+
+# ======================================
+# Management
+# ======================================
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - info
+info:
+  app:
+    name: ${application.name}
