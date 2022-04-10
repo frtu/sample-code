@@ -18,7 +18,7 @@ prefix:
 spring:
   application:
     name: ${application.name}
-
+  jmx.enabled: true
   cloud:
     stream:
       default-binder: kafka
@@ -65,6 +65,9 @@ management:
       exposure:
         include:
           - info
+    jmx:
+      exposure:
+        include: '*'
 info:
   app:
     name: ${application.name}
