@@ -33,6 +33,7 @@
         </dependencies>
     </dependencyManagement>
     <modules>
+        <module>workflow-activiti-event-driven-publisher</module>
         <module>workflow-activiti-event-driven-stream</module>
     </modules>
 </project>
