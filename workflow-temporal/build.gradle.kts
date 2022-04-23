@@ -19,6 +19,11 @@ allprojects {
 }
 
 dependencies {
+    // Temporal
+    implementation("io.temporal:temporal-sdk:1.10.0")
+    implementation("io.temporal:temporal-kotlin:1.10.0")
+    testImplementation("io.temporal:temporal-testing:1.10.0")
+
     // Platform - Log
     implementation("com.github.frtu.logs:logger-core")
     implementation("ch.qos.logback:logback-classic")
