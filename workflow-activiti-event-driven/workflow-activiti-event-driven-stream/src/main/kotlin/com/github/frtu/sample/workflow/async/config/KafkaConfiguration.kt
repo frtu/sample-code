@@ -41,11 +41,12 @@ class KafkaConfiguration {
 
     @Bean
     fun consumerFactory(): ConsumerFactory<String, String> {
-        val props: MutableMap<String, Any?> = HashMap()
-        props[ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG] = bootstrapServers
-        props[ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
-        props[ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG] = StringDeserializer::class.java
-        props[ConsumerConfig.GROUP_ID_CONFIG] = "kafkaListener"
+        val props: MutableMap<String, Any?> = mutableMapOf(
+            ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
+            ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
+            ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
+            ConsumerConfig.GROUP_ID_CONFIG to "kafkaListener"
+        )
         return DefaultKafkaConsumerFactory(props)
     }
 

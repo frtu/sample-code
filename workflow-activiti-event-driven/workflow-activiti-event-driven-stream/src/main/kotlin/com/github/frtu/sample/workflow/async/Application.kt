@@ -17,14 +17,8 @@ import org.springframework.context.annotation.Bean
 
 @EnableConfigurationProperties(AppProperties::class)
 @SpringBootApplication
-@EnableBinding(Sink::class)
 //@EnableR2dbcRepositories
 class Application {
-    @StreamListener(Sink.INPUT)
-    fun handle(message: String) {
-        logger.info("Received: $message")
-    }
-
     @Bean
     fun initializer(
         repositoryService: RepositoryService,
