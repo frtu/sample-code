@@ -10,7 +10,10 @@ group = "com.github.frtu.sample.workflow.temporal"
 
 allprojects {
     tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions.jvmTarget = "11"
+        kotlinOptions{
+            jvmTarget = "11"
+            languageVersion = "1.4"
+        }
     }
     repositories {
         mavenLocal()
@@ -23,8 +26,10 @@ dependencies {
     implementation("io.temporal:temporal-sdk:1.10.0")
     implementation("io.temporal:temporal-kotlin:1.10.0")
     testImplementation("io.temporal:temporal-testing:1.10.0")
+    testImplementation("io.temporal:temporal-testing-junit5:1.10.0")
 
     // Platform - Log
+    implementation("commons-configuration:commons-configuration:1.10")
     implementation("com.github.frtu.logs:logger-core")
     implementation("ch.qos.logback:logback-classic")
     testImplementation("com.github.frtu.libs:lib-utils")
