@@ -4,7 +4,6 @@ import io.temporal.activity.ActivityOptions
 import io.temporal.common.RetryOptions
 import io.temporal.workflow.Workflow
 import java.time.Duration
-import java.util.*
 
 class MoneyTransferWorkflowImpl : MoneyTransferWorkflow {
     // RetryOptions specify how to automatically handle retries when Activities fail.
