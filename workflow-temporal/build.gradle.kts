@@ -64,6 +64,10 @@ allprojects {
 
 subprojects {
     dependencies {
+        // Serialization
+        implementation(Libs.jackson_databind)
+        implementation(Libs.jackson_module_kotlin)
+
         // Platform - Log
         implementation(Libs.logger_core)
         implementation(Libs.log_impl)
@@ -77,6 +81,7 @@ subprojects {
         testImplementation(kotlin("test"))
 
         // Platform - BOMs
+        implementation(platform(Libs.bom_jackson))
         implementation(platform(Libs.bom_kotlin_base))
         implementation(platform(Libs.bom_kotlin_libs))
         implementation(platform(Libs.bom_logger))
