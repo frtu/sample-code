@@ -8,33 +8,23 @@ class SubscriptionActivitiesImpl() : SubscriptionActivities {
     }
 
     override fun sendCancellationEmailDuringTrialPeriod(customer: Customer) {
-        println("** SubscriptionActivities ** sending cancellation email during trial period to : "
-                    + customer.toString()
-        )
+        println("** SubscriptionActivities ** sending cancellation email during trial period to : $customer")
     }
 
     override fun chargeCustomerForBillingPeriod(customer: Customer, billingPeriodNum: Int) {
         println(
-            "** SubscriptionActivities ** performing billing for customer: "
-                    + customer.toString()
-                    + " and billing period: "
-                    + billingPeriodNum
-                .toString() + " and amount: "
-                    + customer.subscription?.billingPeriodCharge
+            "** SubscriptionActivities ** performing billing for customer: $customer" +
+                    " and billing period: $billingPeriodNum and amount: ${customer.subscription?.billingPeriodCharge}"
         )
     }
 
     override fun sendCancellationEmailDuringActiveSubscription(customer: Customer) {
         println(
-            "** SubscriptionActivities ** sending cancellation email during active subscription period to : "
-                    + customer.toString()
+            "** SubscriptionActivities ** sending cancellation email during active subscription period to : $customer"
         )
     }
 
     override fun sendSubscriptionOverEmail(customer: Customer) {
-        println(
-            "** SubscriptionActivities ** sending subscription is over email to : "
-                    + customer.toString()
-        )
+        println("** SubscriptionActivities ** sending subscription is over email to : $customer")
     }
 }
