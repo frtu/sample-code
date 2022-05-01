@@ -6,7 +6,7 @@ import io.temporal.serviceclient.WorkflowServiceStubs
 import java.util.*
 import kotlin.system.exitProcess
 
-fun main(args: Array<String>) {
+fun main() {
     // WorkflowServiceStubs is a gRPC stubs wrapper that talks to the local Docker instance of the Temporal server.
     val service = WorkflowServiceStubs.newInstance()
     val options = WorkflowOptions.newBuilder()

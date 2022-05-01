@@ -28,7 +28,7 @@ const val WORKFLOW_ID_BASE = "SubscriptionsWorkflow"
  */
 var subscription: Subscription = Subscription(Duration.ofSeconds(10), Duration.ofSeconds(10), 24, 120)
 
-fun main(args: Array<String>) {
+fun main() {
     /**
      * Define the Workflow service. It is a gRPC stubs wrapper which talks to the docker instance of
      * our locally running Temporal service.
