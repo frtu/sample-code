@@ -8,7 +8,6 @@ plugins {
     pmd
     `java-library`
     `maven-publish`
-    application
     id("com.github.sherter.google-java-format") version Versions.plugin_google_format
 }
 
@@ -25,8 +24,6 @@ allprojects {
         this.setRenderer(AsciiDependencyReportRenderer())
     }
     tasks.withType<KotlinCompile>().configureEach {
-        sourceCompatibility = Versions.java
-        targetCompatibility = Versions.java
         kotlinOptions {
             jvmTarget = Versions.java
             languageVersion = Versions.language

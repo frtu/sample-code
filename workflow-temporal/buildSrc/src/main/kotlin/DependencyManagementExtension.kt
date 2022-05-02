@@ -6,26 +6,32 @@ object Versions {
     const val kotlinx = "1.5.2"
 
     const val jackson = "2.13.2.1" // 2022-03-30
-    const val commons_configuration = "1.10"
     const val springframework = "5.3.5"
     const val frtu_base = "1.2.3"
     const val frtu_libs = "1.1.5"
     const val frtu_logs = "1.1.4"
 
-    const val temporal = "1.10.0"
-
     const val plugin_jacoco = "0.8.8" // 2022-04-05
     const val plugin_google_format = "0.9" // 2020-06-09
+
+    const val temporal = "1.10.0"
+    const val commons_configuration = "1.10"
 }
 
 object Libs {
-    //---------- Commons -----------
     const val commons_configuration = "commons-configuration:commons-configuration:${Versions.commons_configuration}"
+
+    //---------- Commons -----------
     const val jackson_databind = "com.fasterxml.jackson.core:jackson-databind"
     const val jackson_module_kotlin = "com.fasterxml.jackson.module:jackson-module-kotlin"
     const val jackson_yaml = "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml"
     const val lib_utils = "com.github.frtu.libs:lib-utils"
     const val spring_core = "org.springframework:spring-core:${Versions.springframework}"
+
+    //---------- Commons -----------
+    const val coroutines_core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.kotlinx}"
+    const val coroutines_reactive = "org.jetbrains.kotlinx:kotlinx-coroutines-reactive:${Versions.kotlinx}"
+    const val coroutines_reactor = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor:${Versions.kotlinx}"
 
     //---------- LOGS -----------
     // Implementation for slf4j
