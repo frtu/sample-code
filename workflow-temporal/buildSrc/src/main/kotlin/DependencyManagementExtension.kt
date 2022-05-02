@@ -40,6 +40,7 @@ object Libs {
 
     //---------- TESTS -----------
     const val junit = "org.junit.jupiter:junit-jupiter"
+
     // Mock lib mockk or mockito
     const val mock = "io.mockk:mockk"
     const val assertions = "org.assertj:assertj-core"
