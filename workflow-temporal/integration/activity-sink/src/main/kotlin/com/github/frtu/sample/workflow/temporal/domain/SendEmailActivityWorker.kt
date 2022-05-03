@@ -19,7 +19,7 @@ import org.springframework.kafka.config.TopicBuilder
  * @author Frédéric TU
  */
 @SpringBootApplication
-class ProducerApplication {
+class SendEmailActivityWorker {
     @Autowired
     lateinit var sendEmailActivityImpl: SendEmailActivityImpl
 
@@ -50,6 +50,6 @@ class ProducerApplication {
 }
 
 fun main(args: Array<String>) {
-    System.getProperties().put("server.port", 8083);
-    runApplication<ProducerApplication>(*args)
+    System.getProperties()["server.port"] = 8083;
+    runApplication<SendEmailActivityWorker>(*args)
 }
