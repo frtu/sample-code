@@ -19,38 +19,33 @@ import org.springframework.kafka.listener.KafkaMessageListenerContainer
 @ComponentScan("com.github.frtu.sample.workflow.temporal.service")
 class KafkaConfiguration {
     @Value("\${spring.kafka.bootstrap-servers}")
-    private val bootstrapServers: String? = null
+    lateinit var bootstrapServers: String
 
     @Value("\${application.topic.domain-source}")
-    private val inputTopic: String? = null
+    lateinit var inputTopic: String
 
     @Bean
     @Throws(Exception::class)
-    fun kafkaReader(): IntegrationFlow =
-        IntegrationFlows
-            .from(
-                Kafka.messageDrivenChannelAdapter(
-                    KafkaMessageListenerContainer(
-                        consumerFactory(),
-                        ContainerProperties(inputTopic)
-                    ), ListenerMode.record
-                )
+    fun kafkaReader(): IntegrationFlow = IntegrationFlows
+        .from(
+            Kafka.messageDrivenChannelAdapter(
+                KafkaMessageListenerContainer(consumerFactory(), ContainerProperties(inputTopic)),
+                ListenerMode.record
             )
-            .channel(KAFKA_INPUT)
-            .get()
+        )
+        .channel(KAFKA_INPUT)
+        .get()
 
-    @Bean
-    fun consumerFactory(): ConsumerFactory<String, String> {
-        val props: MutableMap<String, Any?> = mutableMapOf(
+    fun consumerFactory(): ConsumerFactory<String, String> = DefaultKafkaConsumerFactory(
+        mutableMapOf<String, Any?>(
             ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
             ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
             ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
             ConsumerConfig.GROUP_ID_CONFIG to "kafkaListener"
         )
-        return DefaultKafkaConsumerFactory(props)
-    }
+    )
 
     companion object {
-        const val KAFKA_INPUT = "kafka-input"
+        const val KAFKA_INPUT = "subscription-input"
     }
 }

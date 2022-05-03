@@ -5,9 +5,9 @@ application:
   name: integration-stream
   topic:
     # Where domain request is consumed : ATTENTION please put between double quote to avoid ASCII check error
-    domain-source: "domain-source"
+    domain-source: "subscription-source"
     # Where domain result is published
-    domain-result: "domain-result"
+    domain-result: "subscription-result"
 
 prefix:
   key1: value1
