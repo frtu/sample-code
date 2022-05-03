@@ -2,6 +2,7 @@ rootProject.name = "workflow-temporal"
 
 include(
     "samples",
+    "integration/activity-api",
     "integration/activity-sink",
     "integration/workflow-main"
 )
