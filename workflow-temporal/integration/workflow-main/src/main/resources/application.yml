@@ -4,6 +4,9 @@
 application:
   name: worker
 
+prefix:
+  key1: value1
+
 # ======================================
 # Spring Boot
 # ======================================

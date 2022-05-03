@@ -2,8 +2,8 @@ rootProject.name = "workflow-temporal"
 
 include(
     "samples",
-    "standalone/workflow",
-    "standalone/worker"
+    "integration/activity-sink",
+    "integration/workflow-main"
 )
 
 rootProject.children.forEach {

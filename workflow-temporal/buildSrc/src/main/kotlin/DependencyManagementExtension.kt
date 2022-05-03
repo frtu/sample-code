@@ -1,6 +1,7 @@
 object Versions {
     const val java = "11"
 
+    // Allow to enable >1.4 syntax
     const val language = "1.4"
     const val kotlin = "1.5.32"
     const val kotlinx = "1.5.2"
