@@ -16,6 +16,19 @@ apply(plugin = "org.jetbrains.kotlin.plugin.spring")
 apply(plugin = "io.spring.dependency-management")
 
 dependencies {
+    // Project
+    implementation(project(":integration_activity-api"))
+
+    // Temporal
+    implementation("io.temporal:temporal-sdk:${Versions.temporal}")
+    implementation("io.temporal:temporal-kotlin:${Versions.temporal}")
+    testImplementation("io.temporal:temporal-testing:${Versions.temporal}")
+
+    // Commons
+    implementation(Libs.commons_configuration)
+
+
+    // Spring Cloud
     implementation("org.springframework.cloud:spring-cloud-stream")
     implementation("org.springframework.cloud:spring-cloud-stream-binder-kafka")
 //    implementation("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
