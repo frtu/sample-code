@@ -1,7 +1,7 @@
 package com.github.frtu.sample.workflow.temporal
 
 import com.github.frtu.sample.workflow.temporal.consumer.ConsumerSource
-import com.github.frtu.sample.workflow.temporal.producer.ProducerSource
+import com.github.frtu.sample.workflow.temporal.domain.SendEmailActivityImpl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,7 +28,7 @@ class EmbeddedKafkaIntegrationTest {
     lateinit var consumer: ConsumerSource
 
     @Autowired
-    lateinit var producer: ProducerSource
+    lateinit var producer: SendEmailActivityImpl
 
     @Test
     @Throws(Exception::class)

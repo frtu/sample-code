@@ -16,6 +16,17 @@ the<DependencyManagementExtension>().apply {
 }
 
 dependencies {
+    // Project
+    implementation(project(":integration_activity-api"))
+
+    // Temporal
+    implementation("io.temporal:temporal-sdk:${Versions.temporal}")
+    implementation("io.temporal:temporal-kotlin:${Versions.temporal}")
+    testImplementation("io.temporal:temporal-testing:${Versions.temporal}")
+
+    // Commons
+    implementation(Libs.commons_configuration)
+
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.kafka:spring-kafka")
 
