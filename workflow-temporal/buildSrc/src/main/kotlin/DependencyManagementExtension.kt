@@ -22,6 +22,7 @@ object Versions {
 }
 
 object Libs {
+    const val kafka_client = "org.apache.kafka:kafka-clients:2.6.1"
     const val commons_configuration = "commons-configuration:commons-configuration:${Versions.commons_configuration}"
 
     //---------- Commons -----------
