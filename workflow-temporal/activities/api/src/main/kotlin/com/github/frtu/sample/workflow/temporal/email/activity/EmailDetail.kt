@@ -1,4 +1,4 @@
-package com.github.frtu.sample.workflow.temporal.activity
+package com.github.frtu.sample.workflow.temporal.email.activity
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder
 

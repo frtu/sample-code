@@ -1,12 +1,12 @@
-package com.github.frtu.sample.workflow.temporal.activity
+package com.github.frtu.sample.workflow.temporal.email.activity
 
 import io.temporal.activity.ActivityInterface
 import io.temporal.activity.ActivityMethod
 
 @ActivityInterface
-interface SendEmailActivity {
+interface EmailSinkActivity {
     @ActivityMethod
     fun emit(email: Email)
 }
 
-const val TASK_QUEUE_SEND_EMAIL = "TASK_QUEUE_SEND_EMAIL"
+const val TASK_QUEUE_EMAIL = "TASK_QUEUE_EMAIL"
