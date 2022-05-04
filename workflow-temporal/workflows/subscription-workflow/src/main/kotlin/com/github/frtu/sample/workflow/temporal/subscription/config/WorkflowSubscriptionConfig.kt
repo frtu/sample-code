@@ -2,8 +2,7 @@ package com.github.frtu.sample.workflow.temporal.subscription.config
 
 import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflowImpl
 import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.TASK_QUEUE_SUBSCRIPTION
-import io.temporal.client.WorkflowClient
-import io.temporal.serviceclient.WorkflowServiceStubs
+import com.github.frtu.workflow.temporal.config.TemporalConfig
 import io.temporal.worker.Worker
 import io.temporal.worker.WorkerFactory
 import org.springframework.context.annotation.Bean

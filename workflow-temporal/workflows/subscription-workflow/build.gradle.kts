@@ -14,6 +14,7 @@ apply(plugin = "io.spring.dependency-management")
 
 dependencies {
     // Project
+    implementation(project(":temporal-lib"))
     implementation(project(":activities_api"))
 
     // Temporal

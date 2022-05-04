@@ -17,6 +17,7 @@ the<DependencyManagementExtension>().apply {
 
 dependencies {
     // Project
+    implementation(project(":temporal-lib"))
     implementation(project(":activities_api"))
 
     // Temporal

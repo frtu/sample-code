@@ -1,4 +1,4 @@
-package com.github.frtu.sample.workflow.temporal.subscription.config
+package com.github.frtu.workflow.temporal.config
 
 import io.temporal.client.WorkflowClient
 import io.temporal.serviceclient.WorkflowServiceStubs

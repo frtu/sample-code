@@ -2,11 +2,8 @@ package com.github.frtu.sample.workflow.temporal.email
 
 import com.github.frtu.sample.workflow.temporal.email.activity.Email
 import com.github.frtu.sample.workflow.temporal.email.activity.EmailSinkActivityImpl
-import com.github.frtu.sample.workflow.temporal.email.config.TemporalConfig
+import com.github.frtu.sample.workflow.temporal.email.config.EmailActivityConfig
 import java.util.*
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.ApplicationArguments
-import org.springframework.boot.ApplicationRunner
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -14,7 +11,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
 
 @SpringBootApplication
-@Import(TemporalConfig::class)
 class Application {
     @Bean
     fun initializer(emailSinkActivityImpl: EmailSinkActivityImpl): CommandLineRunner = CommandLineRunner {
