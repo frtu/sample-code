@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 
 @Configuration
-@Import(TemporalConfig::class, RouterConfig::class)
+@Import(
+    RouterConfig::class,
+    WorkflowSubscriptionConfig::class,
+)
 @ComponentScan("com.github.frtu.sample.workflow.temporal.subscription.domain.service")
 class AllSubscriptionConfig
