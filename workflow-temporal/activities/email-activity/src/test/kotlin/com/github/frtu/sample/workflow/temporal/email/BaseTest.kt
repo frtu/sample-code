@@ -1,4 +1,4 @@
-package com.github.frtu.sample.workflow.temporal
+package com.github.frtu.sample.workflow.temporal.email
 
 import com.github.frtu.kotlin.utils.io.ResourceHelper
 import io.mockk.every

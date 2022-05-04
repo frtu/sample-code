@@ -1,10 +1,10 @@
-package com.github.frtu.sample.workflow.temporal.consumer
+package test
 
 import org.apache.kafka.clients.admin.NewTopic
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
-import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.config.TopicBuilder
 
 /**
@@ -14,8 +14,8 @@ import org.springframework.kafka.config.TopicBuilder
  */
 @SpringBootApplication
 class ConsumerApplication {
-//    @Value("\${application.topic.domain-source}")
-//    lateinit var inputSource: String
+    @Value("\${application.topic.domain-source}")
+    lateinit var inputSource: String
 
     @Bean
     fun topic(): NewTopic {

@@ -17,7 +17,7 @@ the<DependencyManagementExtension>().apply {
 
 dependencies {
     // Project
-    implementation(project(":integration_activity-api"))
+    implementation(project(":activities_api"))
 
     // Temporal
     implementation("io.temporal:temporal-sdk:${Versions.temporal}")

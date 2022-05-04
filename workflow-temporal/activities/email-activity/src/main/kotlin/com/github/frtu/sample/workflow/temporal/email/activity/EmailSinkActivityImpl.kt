@@ -1,4 +1,4 @@
-package com.github.frtu.sample.workflow.temporal.domain
+package com.github.frtu.sample.workflow.temporal.email.activity
 
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -6,25 +6,17 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.stereotype.Service
 
-import com.github.frtu.sample.workflow.temporal.activity.Email
-import com.github.frtu.sample.workflow.temporal.activity.SendEmailActivity
-import java.util.*
-
 @Service
-class SendEmailActivityImpl : SendEmailActivity {
+class EmailSinkActivityImpl : EmailSinkActivity {
     @Value("\${application.topic.domain-source}")
     lateinit var outputSource: String
 
     @Autowired
-    lateinit var kafkaTemplate: KafkaTemplate<String, String>
-
-    fun send(message: String) {
-        emit(Email(data = message, identity = UUID.randomUUID()))
-    }
+    lateinit var kafkaTemplate: KafkaTemplate<String, Any>
 
     override fun emit(email: Email) {
         logger.info("Sending to topic:$outputSource message:$email")
-        kafkaTemplate.send(outputSource, email.data)
+        kafkaTemplate.send(outputSource, email)
     }
 
     internal val logger = LoggerFactory.getLogger(this::class.java)

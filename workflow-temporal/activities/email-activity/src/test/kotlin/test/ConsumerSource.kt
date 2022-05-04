@@ -1,9 +1,8 @@
-package com.github.frtu.sample.workflow.temporal.consumer
+package test
 
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
-import org.springframework.stereotype.Component
 import org.springframework.stereotype.Service
 import java.util.concurrent.CountDownLatch
 
