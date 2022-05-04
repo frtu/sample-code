@@ -12,7 +12,7 @@ class EmailSinkActivityImpl : EmailSinkActivity {
     lateinit var outputSource: String
 
     @Autowired
-    lateinit var kafkaTemplate: KafkaTemplate<String, Any>
+    lateinit var kafkaTemplate: KafkaTemplate<String, Email>
 
     override fun emit(email: Email) {
         logger.info("Sending to topic:$outputSource message:$email")

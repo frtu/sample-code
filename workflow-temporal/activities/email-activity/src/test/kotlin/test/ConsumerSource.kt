@@ -1,5 +1,6 @@
 package test
 
+import com.github.frtu.sample.workflow.temporal.email.activity.Email
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
@@ -9,14 +10,14 @@ import java.util.concurrent.CountDownLatch
 @Service
 class ConsumerSource {
     companion object {
-        const val inputSource: String = "domain-source"
+        const val inputSource: String = "email-source"
     }
 
     val latch = CountDownLatch(1)
     var payload: String? = null
 
     @KafkaListener(id = "consumer-1", topics = [inputSource])
-    fun listen(consumerRecord: ConsumerRecord<Any, Any>) {
+    fun listen(consumerRecord: ConsumerRecord<String, Email>) {
         listen(consumerRecord.toString())
     }
 

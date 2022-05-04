@@ -1,11 +1,7 @@
 package test
 
-import org.apache.kafka.clients.admin.NewTopic
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
-import org.springframework.context.annotation.Bean
-import org.springframework.kafka.config.TopicBuilder
 
 /**
  * Based on :
@@ -13,20 +9,9 @@ import org.springframework.kafka.config.TopicBuilder
  * @author Frédéric TU
  */
 @SpringBootApplication
-class ConsumerApplication {
-    @Value("\${application.topic.domain-source}")
-    lateinit var inputSource: String
-
-    @Bean
-    fun topic(): NewTopic {
-        return TopicBuilder.name(ConsumerSource.inputSource)
-            .partitions(10)
-            .replicas(1)
-            .build()
-    }
-}
+class ConsumerApplication
 
 fun main(args: Array<String>) {
-    System.getProperties().put("server.port", 8084);
+    System.getProperties()["server.port"] = 8084
     runApplication<ConsumerApplication>(*args)
 }
