@@ -2,9 +2,10 @@ rootProject.name = "workflow-temporal"
 
 include(
     "samples",
-    "integration/workflow-main"
     "activities/api",
     "activities/email-activity",
+    "workflows/subscription-workflow",
+    "workflows/subscription-service"
 )
 
 rootProject.children.forEach {
