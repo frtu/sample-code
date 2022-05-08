@@ -52,6 +52,7 @@ class SubscriptionWorkflowImpl : SubscriptionWorkflow {
     }
 
     private val structuredLogger = StructuredLogger.create(this::class.java)
+    private val logger = Workflow.getLogger(this::class.java)
 
     companion object {
         private const val SUBSCRIPTION = "Subscription"

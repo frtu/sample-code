@@ -1,6 +1,8 @@
 package com.github.frtu.sample.workflow.temporal.email.activity
 
-import org.slf4j.LoggerFactory
+import com.github.frtu.logs.core.StructuredLogger
+import com.github.frtu.logs.core.StructuredLogger.key
+import com.github.frtu.logs.core.StructuredLogger.message
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.KafkaTemplate
@@ -15,9 +17,9 @@ class EmailSinkActivityImpl : EmailSinkActivity {
     lateinit var kafkaTemplate: KafkaTemplate<String, Email>
 
     override fun emit(email: Email) {
-        logger.info("Sending to topic:$outputSource message:$email")
+        structuredLogger.info(key("topic", outputSource), message("Sending message:$email"))
         kafkaTemplate.send(outputSource, email)
     }
 
-    internal val logger = LoggerFactory.getLogger(this::class.java)
+    private val structuredLogger = StructuredLogger.create(this::class.java)
 }
