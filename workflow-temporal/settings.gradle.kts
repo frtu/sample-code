@@ -2,7 +2,7 @@ rootProject.name = "workflow-temporal"
 
 include(
     "samples",
-    "temporal-lib",
+    "spring-boot/starter-temporal",
     "activities/api",
     "activities/email-activity",
     "workflows/subscription-workflow",
@@ -10,5 +10,5 @@ include(
 )
 
 rootProject.children.forEach {
-    it.name = it.name.replace("/", "_")
+    it.name = it.name.replace("/", "-")
 }

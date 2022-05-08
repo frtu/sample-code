@@ -17,8 +17,8 @@ the<DependencyManagementExtension>().apply {
 
 dependencies {
     // Project
-    implementation(project(":temporal-lib"))
-    implementation(project(":activities_api"))
+    implementation(project(":spring-boot-starter-temporal"))
+    implementation(project(":activities-api"))
 
     // Temporal
     implementation("io.temporal:temporal-sdk:${Versions.temporal}")

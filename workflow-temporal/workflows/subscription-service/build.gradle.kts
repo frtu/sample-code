@@ -17,7 +17,7 @@ apply(plugin = "io.spring.dependency-management")
 
 dependencies {
     // Project
-    implementation(project(":workflows_subscription-workflow"))
+    implementation(project(":workflows-subscription-workflow"))
 
     // Temporal
     implementation("io.temporal:temporal-sdk:${Versions.temporal}")
