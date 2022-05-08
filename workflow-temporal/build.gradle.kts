@@ -71,6 +71,14 @@ subprojects {
         testImplementation(Libs.lib_utils)
         testImplementation(Libs.spring_core)
 
+        // Platform - Tracing
+        implementation(Libs.opentelemetry_sdk)
+        implementation(Libs.opentelemetry_trace_propagators)
+        implementation(Libs.opentelemetry_semconv)
+        implementation(Libs.opentelemetry_shim)
+        implementation(Libs.opentelemetry_exporter)
+        implementation(Libs.trace_impl)
+
         // Test
         testImplementation(Libs.junit)
         testImplementation(Libs.mock)
@@ -82,6 +90,7 @@ subprojects {
         implementation(platform(Libs.bom_kotlin_base))
         implementation(platform(Libs.bom_kotlin_libs))
         implementation(platform(Libs.bom_logger))
+        implementation(platform(Libs.bom_opentelemetry))
         implementation(platform(kotlin("bom")))
         implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))

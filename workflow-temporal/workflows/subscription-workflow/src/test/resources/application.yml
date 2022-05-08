@@ -21,6 +21,9 @@ logging:
 server:
   port: 8090
 
+jaeger:
+  endpoint: "http://localhost:14250"
+
 management:
   endpoints:
     web:
