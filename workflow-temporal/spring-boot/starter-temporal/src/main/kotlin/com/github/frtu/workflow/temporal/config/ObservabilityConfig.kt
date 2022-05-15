@@ -7,16 +7,18 @@ import io.temporal.opentracing.OpenTracingClientInterceptor
 import io.temporal.opentracing.OpenTracingOptions
 import io.temporal.opentracing.OpenTracingWorkerInterceptor
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import javax.annotation.PostConstruct
 
 @Configuration
+@ConditionalOnProperty(name = ["jaeger.enabled"], havingValue = "true", matchIfMissing = false)
 class ObservabilityConfig {
     @Value("\${spring.application.name}")
     lateinit var applicationName: String
 
-    @Value("\${jaeger.endpoint:http://localhost:14250}")
+    @Value("\${jaeger.endpoint}")
     lateinit var jaegerEndpoint: String
 
     @PostConstruct

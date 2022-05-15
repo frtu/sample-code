@@ -2,6 +2,7 @@ package com.github.frtu.sample.workflow.temporal.subscription.config
 
 import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflowImpl
 import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.TASK_QUEUE_SUBSCRIPTION
+import com.github.frtu.workflow.temporal.config.ObservabilityConfig
 import com.github.frtu.workflow.temporal.config.TemporalConfig
 import io.temporal.worker.Worker
 import io.temporal.worker.WorkerFactory
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 
 @Configuration
-@Import(TemporalConfig::class)
+@Import(TemporalConfig::class, ObservabilityConfig::class)
 @ComponentScan("com.github.frtu.sample.workflow.temporal.subscription.domain.workflow")
 class WorkflowSubscriptionConfig {
     @Bean

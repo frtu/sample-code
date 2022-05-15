@@ -22,6 +22,7 @@ server:
   port: 8090
 
 jaeger:
+  enabled: false
   endpoint: "http://localhost:14250"
 
 management:
