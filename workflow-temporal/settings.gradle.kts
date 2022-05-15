@@ -5,6 +5,7 @@ include(
     "spring-boot/starter-temporal",
     "activities/api",
     "activities/email-activity",
+    "workflows/reminder-workflow",
     "workflows/subscription-workflow",
     "workflows/subscription-service"
 )

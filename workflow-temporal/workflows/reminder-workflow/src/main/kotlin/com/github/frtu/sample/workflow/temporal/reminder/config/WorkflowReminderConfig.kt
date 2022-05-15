@@ -1,10 +1,7 @@
-package com.github.frtu.sample.workflow.temporal.subscription.config
+package com.github.frtu.sample.workflow.temporal.reminder.config
 
 import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflowImpl
 import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.TASK_QUEUE_REMINDER
-import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflowImpl
-import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.TASK_QUEUE_SUBSCRIPTION
-import com.github.frtu.workflow.temporal.config.ObservabilityConfig
 import com.github.frtu.workflow.temporal.config.TemporalConfig
 import io.temporal.worker.WorkerFactory
 import org.springframework.context.annotation.Bean
@@ -13,17 +10,14 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 
 @Configuration
-@Import(TemporalConfig::class, ObservabilityConfig::class)
-@ComponentScan("com.github.frtu.sample.workflow.temporal.subscription.domain.workflow")
-class WorkflowSubscriptionConfig {
+@Import(TemporalConfig::class)
+@ComponentScan("com.github.frtu.sample.workflow.temporal.reminder.domain.workflow")
+class WorkflowReminderConfig {
     /**
      * There should ONLY have one worker per application
      */
     @Bean
     fun worker(factory: WorkerFactory): String {
-        factory.newWorker(TASK_QUEUE_SUBSCRIPTION).registerWorkflowImplementationTypes(
-            SubscriptionWorkflowImpl::class.java,
-        )
         factory.newWorker(TASK_QUEUE_REMINDER).registerWorkflowImplementationTypes(
             ReminderWorkflowImpl::class.java,
         )

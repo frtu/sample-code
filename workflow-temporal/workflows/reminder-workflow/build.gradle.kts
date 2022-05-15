@@ -16,7 +16,6 @@ dependencies {
     // Project
     implementation(project(":spring-boot-starter-temporal"))
     implementation(project(":activities-api"))
-    implementation(project(":workflows-reminder-workflow"))
 
     // Temporal
     implementation("io.temporal:temporal-sdk:${Versions.temporal}")
@@ -26,11 +25,6 @@ dependencies {
     // Spring
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springdoc:springdoc-openapi-webflux-ui:${Versions.springdoc}")
-
-//    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-//    runtimeOnly("com.h2database:h2")
-//    runtimeOnly("org.postgresql:postgresql")
-//    implementation("org.flywaydb:flyway-core")
 
     // Commons
     implementation(Libs.commons_configuration)
