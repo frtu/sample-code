@@ -4,7 +4,6 @@ import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.Sub
 import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.TASK_QUEUE_SUBSCRIPTION
 import com.github.frtu.workflow.temporal.config.ObservabilityConfig
 import com.github.frtu.workflow.temporal.config.TemporalConfig
-import io.temporal.worker.Worker
 import io.temporal.worker.WorkerFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
@@ -15,14 +14,16 @@ import org.springframework.context.annotation.Import
 @Import(TemporalConfig::class, ObservabilityConfig::class)
 @ComponentScan("com.github.frtu.sample.workflow.temporal.subscription.domain.workflow")
 class WorkflowSubscriptionConfig {
+    /**
+     * There should ONLY have one worker per application
+     */
     @Bean
-    fun worker(factory: WorkerFactory): Worker {
-        val worker = factory.newWorker(TASK_QUEUE_SUBSCRIPTION)
-        // This Worker hosts both Workflow and Activity implementations.
-        // Workflows are stateful so a type is needed to create instances.
-        worker.registerWorkflowImplementationTypes(SubscriptionWorkflowImpl::class.java)
+    fun worker(factory: WorkerFactory): String {
+        factory.newWorker(TASK_QUEUE_SUBSCRIPTION).registerWorkflowImplementationTypes(
+            SubscriptionWorkflowImpl::class.java,
+        )
         // Start listening to the Task Queue.
         factory.start()
-        return worker
+        return "STARTED"
     }
 }
