@@ -23,4 +23,12 @@ message Email {
 
   google.protobuf.Timestamp event_time = 4; // epoch time when the event occurred. See https://databricks.com/blog/2017/05/08/event-time-aggregation-watermarking-apache-sparks-structured-streaming.html
 }
+
+message SendResult {
+  string message = 1;
+}
+
+service Sender {
+  rpc send (Email) returns (SendResult) {}
+}
 // [END java_declaration and messages]
