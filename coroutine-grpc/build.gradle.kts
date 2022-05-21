@@ -1,18 +1,29 @@
 // https://github.com/grpc/grpc-kotlin/blob/master/compiler/README.md
 import com.google.protobuf.gradle.*
+import io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
 
 plugins {
     `java-library`
     kotlin("jvm")
+    kotlin("plugin.spring") version Versions.kotlin
+    id("org.springframework.boot") version Versions.spring_boot
     id("com.google.protobuf") version Versions.plugin_protobuf
 //    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 //apply(plugin = "org.jlleitschuh.gradle.ktlint")
 apply(plugin = "idea")
+apply(plugin = "org.jetbrains.kotlin.jvm")
+apply(plugin = "org.jetbrains.kotlin.plugin.spring")
+apply(plugin = "io.spring.dependency-management")
 
 group = "com.github.frtu.sample.grpc"
 
 dependencies {
+    // Spring
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springdoc:springdoc-openapi-webflux-ui:${Versions.springdoc}")
+
     implementation("com.google.protobuf:protobuf-java:${Versions.protobuf}")
     implementation("com.google.protobuf:protobuf-java-util:${Versions.protobuf}")
     implementation("com.google.protobuf:protobuf-kotlin:${Versions.protobuf}")
