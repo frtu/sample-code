@@ -20,6 +20,7 @@ apply(plugin = "io.spring.dependency-management")
 group = "com.github.frtu.sample.grpc"
 
 dependencies {
+    implementation("net.devh:grpc-server-spring-boot-starter:${Versions.grpc_spring_boot_starter}")
     // Spring
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springdoc:springdoc-openapi-webflux-ui:${Versions.springdoc}")
