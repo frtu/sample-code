@@ -4,21 +4,30 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 
 fun main() = runBlocking {
-    val flowError = FlowError()
-    flowError.runWithErrors()
+    runWithErrors()
 }
 
-class FlowError {
-    suspend fun runWithErrors() {
-        val dataFlow = flowOf(1, 2, 3)
-        dataFlow
-            .map {
-                if (it % 3 == 0) {
+suspend fun runWithErrors() {
+    val dataFlow = flowOf(1, 2, 3)
+    dataFlow
+        .map {
+            when {
+                it % 3 == 2 -> {
+                    throw IllegalArgumentException("At $it, exception can be raised & pass")
+                }
+                it % 3 == 0 -> {
                     error("Raise error on $it")
-                } else it
+                }
+                else -> it
             }
-            .catch { e -> throw e } // propagate exception
-            .onCompletion { println("ended") }
-            .collect { println(it) }
-    }
+        }
+        .catch { e ->
+            println(e.message)
+            when (e) {
+                is IllegalArgumentException -> println("Skip IllegalArgumentException")
+                else -> throw e
+            }
+        } // propagate exception
+        .onCompletion { println("ended") }
+        .collect { println(it) }
 }
