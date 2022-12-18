@@ -1,0 +1,4 @@
+application:
+  config.enabled: false
+
+prefix.key1: test_override_value
