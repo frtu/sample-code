@@ -56,10 +56,10 @@ management:
           - info
           - health
           - metrics
-          - prometheus
-  endpoint:
-    metrics.enabled: true
-    health.show-details: ALWAYS
+#          - prometheus
+#  endpoint:
+#    metrics.enabled: true
+#    health.show-details: ALWAYS
 info:
   app:
     name: ${application.name}

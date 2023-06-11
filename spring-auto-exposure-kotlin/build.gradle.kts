@@ -7,6 +7,7 @@ object Versions {
 
     const val JACKSON_VERSION = "2.13.4"
 
+    const val SPRING_FWK = "5.3.26"
     const val SPRING_BOOT_STARTER = "2.7.10"
     const val SPRING_DOC = "1.6.9" // 2022-05-27
     const val R2DBC = "Arabba-SR13" // 2022-03-18
@@ -105,11 +106,6 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-aop")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
-    // DevTools and Monitoring
-    implementation("org.springframework.boot:spring-boot-devtools")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    runtimeOnly("io.micrometer:micrometer-registry-prometheus")
-
     // Serialization
     implementation("com.fasterxml.jackson.core:jackson-databind")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -122,10 +118,10 @@ dependencies {
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 
     // Spring dev and monitoring
-    implementation("org.springframework.boot:spring-boot-devtools")
-    implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("io.micrometer:micrometer-core")
-    implementation("io.micrometer:micrometer-registry-prometheus")
+//    implementation("org.springframework.boot:spring-boot-devtools")
+//    implementation("org.springframework.boot:spring-boot-starter-actuator")
+//    implementation("io.micrometer:micrometer-core")
+//    implementation("io.micrometer:micrometer-registry-prometheus")
 
     // Platform - Observability
     implementation("io.opentelemetry:opentelemetry-sdk")
@@ -180,6 +176,9 @@ configurations.all {
             }
             if (requested.group == "org.springframework.boot") {
                 useVersion(SPRING_BOOT_STARTER)
+            }
+            if (requested.group == "org.springframework") {
+                useVersion(SPRING_FWK)
             }
         }
     }
