@@ -1,6 +1,6 @@
 package com.github.frtu.samples.coroutine.millions
 
-object MillionThread
+object MillionVirtualThread
 
 fun main() {
     val threads = (1..1_000_000).map { index ->
