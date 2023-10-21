@@ -73,6 +73,10 @@
             <groupId>com.github.frtu.logs</groupId>
             <artifactId>logger-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
