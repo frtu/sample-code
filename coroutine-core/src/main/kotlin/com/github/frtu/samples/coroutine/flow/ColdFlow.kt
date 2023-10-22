@@ -1,4 +1,4 @@
-package com.github.frtu.samples.coroutine.core
+package com.github.frtu.samples.coroutine.flow
 
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList

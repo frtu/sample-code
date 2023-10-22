@@ -20,7 +20,6 @@ class CaptureThreadExecution(
 
     private fun getIndex() = (getTime() - referenceTime).toInt()
 
-
     fun print(range: Int) {
         for ((key, value) in threadMap) {
             print("$key:")
