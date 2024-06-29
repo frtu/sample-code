@@ -1,4 +1,4 @@
-package com.github.frtu.mail.broker.producer
+package com.github.frtu.sample.kafka.benchmark.producer
 
 import org.apache.kafka.clients.admin.NewTopic
 import org.springframework.beans.factory.annotation.Autowired

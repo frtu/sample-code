@@ -23,9 +23,6 @@ application:
         maxAttempts: 3
         timeout: 10000
 
-prefix:
-  key1: value1
-
 # ======================================
 # Spring Boot
 # ======================================

@@ -1,4 +1,4 @@
-package com.github.frtu.sample.kafka.web
+package com.github.frtu.sample.kafka.source.web
 
 import com.github.frtu.logs.core.RpcLogger
 import com.github.frtu.logs.core.RpcLogger.requestBody

@@ -53,6 +53,9 @@
 
     <!--Use this version when Spring doesn't start because of Bean inits -->
     <springProfile name="debug">
+        <!-- ====================================== -->
+        <!-- Spring Init -->
+        <!-- ====================================== -->
         <!--DevToolsPropertyDefaultsPostProcessor-->
         <logger name="logging.level.web" level="DEBUG" additivity="true"/>
         <!--Scanned properties-->
@@ -64,6 +67,9 @@
         <!--Spring Boot scan-->
         <logger name="org.springframework.boot.autoconfigure.logging" level="DEBUG" additivity="true"/>
 
+        <!-- ====================================== -->
+        <!-- Kafka -->
+        <!-- ====================================== -->
         <!-- Partition assignment -->
         <logger name="org.springframework.kafka.listener.KafkaMessageListenerContainer" level="DEBUG" additivity="true"/>
         <!-- Joining group -->
@@ -73,6 +79,9 @@
 
         <!-- Offset management - offset committed, set and reset -->
         <logger name="org.apache.kafka.clients.consumer.internals" level="DEBUG" additivity="true"/>
+
+        <!-- DeadLetter -->
+        <logger name="org.springframework.kafka.retrytopic.DeadLetterPublishingRecovererFactory" level="DEBUG" additivity="true"/>
 
         <root level="INFO">
             <appender-ref ref="STDOUT"/>

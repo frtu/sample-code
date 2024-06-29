@@ -17,7 +17,6 @@ import org.springframework.r2dbc.connection.init.CompositeDatabasePopulator
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 
-@EnableConfigurationProperties(AppProperties::class)
 @SpringBootApplication
 //@EnableR2dbcRepositories
 class Application {

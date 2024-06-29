@@ -1,0 +1,49 @@
+# ======================================
+# TOPOLOGY and EXTERNAL DEPENDENCIES
+# ======================================
+application:
+    name: spring-kafka-publisher
+    channel:
+        # Where email request is consumed
+        email-source:
+            topic: "input-email"
+
+# ======================================
+# Spring Boot
+# ======================================
+spring:
+    application:
+        name: ${application.name}
+
+    kafka:
+        bootstrap-servers: ${KAFKA_BROKERS:localhost:9092}
+        producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+        consumer:
+            key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+            auto-offset-reset: earliest
+
+# ======================================
+# Management
+# ======================================
+server:
+    port: 8080
+
+management:
+    endpoints:
+        web:
+            exposure:
+                include:
+                    - info
+                    - health
+                    - metrics
+    #          - prometheus
+    endpoint:
+        metrics.enabled: true
+        health.show-details: ALWAYS
+info:
+    app:
+        name: ${application.name}
+        port: ${server.port}

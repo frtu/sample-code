@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service
 class KafkaEmailProcessor(
     private val repository: IEmailRepository,
 ) {
+//    @KafkaHandler
+
     @KafkaListener(
         topics = ["\${application.channel.email-source.topic}"],
         groupId = "consumer-group-email-2",
@@ -54,6 +56,13 @@ class KafkaEmailProcessor(
             entry("offset", record.offset()),
             entry("timestamp", record.timestamp())
         )
+//        val uriPath = "/v1/emails"
+//        rpcLogger.info(uri(uriPath), message("find all"))
+//        repository.findAll()
+//
+//        val entity = repository.findById(id.toLong())
+//
+//        val createdId = repository.save(emailEntity)
         throw RuntimeException("test")
     }
 
