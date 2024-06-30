@@ -1,6 +1,5 @@
-package com.github.frtu.sample.kafka.benchmark.producer
+package com.github.frtu.sample.kafka.sink.async
 
-import java.util.concurrent.CompletableFuture
 import java.util.concurrent.TimeUnit
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.apache.kafka.clients.producer.RecordMetadata
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.support.SendResult
 import org.springframework.stereotype.Service
-
 
 @Service
 class ProducerEmailSource {

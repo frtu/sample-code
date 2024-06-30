@@ -1,5 +1,6 @@
 package com.github.frtu.sample.kafka.benchmark.producer
 
+import com.github.frtu.sample.kafka.sink.async.ProducerEmailSource
 import org.apache.kafka.clients.admin.NewTopic
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.ApplicationArguments
