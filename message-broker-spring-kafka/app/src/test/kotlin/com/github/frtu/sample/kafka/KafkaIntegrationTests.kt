@@ -1,6 +1,7 @@
 package com.github.frtu.sample.kafka
 
 import com.github.frtu.sample.kafka.sink.async.ProducerEmailSource
+import com.github.frtu.sample.kafka.source.async.DltTrigger
 import com.github.frtu.sample.kafka.source.async.Trigger
 import com.github.frtu.sample.kafka.source.async.TriggerData
 import io.kotest.matchers.shouldBe
@@ -10,9 +11,11 @@ import io.mockk.slot
 import java.util.UUID
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
+import java.util.function.Consumer
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -41,7 +44,9 @@ import org.springframework.test.context.TestPropertySource
 @ActiveProfiles("test")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class KafkaIntegrationTest(
+    @Value("\${application.channel.email-source.topic}") private val topic: String,
     @Autowired private val trigger: Trigger,
+    @Autowired private val dltTrigger: DltTrigger,
     @Autowired private val kafkaClient: ProducerEmailSource,
     @Autowired private val embeddedKafkaBroker: EmbeddedKafkaBroker,
     @Autowired private val registry: KafkaListenerEndpointRegistry,
@@ -61,20 +66,32 @@ class KafkaIntegrationTest(
      */
     @Test
     fun testCreateAndUpdateItems() {
+        //--------------------------------------
+        // 1. Init
+        //--------------------------------------
         val totalMessages = 2
-
-        val slot = slot<TriggerData>()
         val latch = CountDownLatch(totalMessages + 2)
+
+        //--------------------------------------
+        // 1b. Prepare MOCK
+        //--------------------------------------
+        val slot = slot<TriggerData>()
         every { trigger.received(capture(slot)) } answers {
             latch.countDown()
-            if (latch.count == 0L) {
+            if (latch.count <= 2L) {
                 throw RuntimeException("final event")
             }
         }
 
-        val itemIds: MutableSet<UUID> = HashSet()
+        val dltSlot = slot<TriggerData>()
+        every { dltTrigger.received(capture(dltSlot)) } answers {
+            latch.countDown()
+        }
 
-        // Create new items.
+        //--------------------------------------
+        // 2. Execute
+        //--------------------------------------
+        val itemIds: MutableSet<UUID> = HashSet()
         for (i in 0 until totalMessages) {
             val itemId = UUID.randomUUID()
             kafkaClient.send(itemId.toString())
@@ -83,8 +100,14 @@ class KafkaIntegrationTest(
 
         latch.await(10, TimeUnit.SECONDS)
 
+        //--------------------------------------
+        // 3. Validate
+        //--------------------------------------
         slot.isCaptured shouldBe true
-        println(slot.captured)
+        slot.captured.topic shouldBe "$topic-retry"
+
+        dltSlot.isCaptured shouldBe true
+        dltSlot.captured.topic shouldBe "$topic-dlt"
     }
 }
 
@@ -93,4 +116,8 @@ class TestConfig {
     @Bean
     @Primary
     fun trigger() = mockk<Trigger>(relaxed = true)
+
+    @Bean
+    @Primary
+    fun dlttrigger() = mockk<DltTrigger>(relaxed = true)
 }

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service
 @Service
 class KafkaEmailProcessor(
     private val trigger: Trigger,
+    private val dltTrigger: DltTrigger,
 ) {
 //    @KafkaHandler
 
@@ -45,7 +46,7 @@ class KafkaEmailProcessor(
         autoCreateTopics = "true",
         topicSuffixingStrategy = TopicSuffixingStrategy.SUFFIX_WITH_INDEX_VALUE,
         dltStrategy = DltStrategy.ALWAYS_RETRY_ON_ERROR,
-        autoStartDltHandler = "false",
+        autoStartDltHandler = "\${application.channel.email-source.drain-dlt:true}",
         include = [RuntimeException::class],
     ) // https://docs.spring.io/spring-kafka/reference/retrytopic/retry-config.html
     fun listen(
@@ -70,7 +71,7 @@ class KafkaEmailProcessor(
     }
 
     @DltHandler
-    fun processMessage(
+    fun dlt(
         record: ConsumerRecord<String, ByteArray>,
     ) {
         rpcLogger.info(
@@ -81,6 +82,7 @@ class KafkaEmailProcessor(
             entry("offset", record.offset()),
             entry("timestamp", record.timestamp())
         )
+        dltTrigger.received(TriggerData(record.value().decodeToString(), record.topic()))
     }
 
     internal val logger = LoggerFactory.getLogger(this::class.java)
