@@ -4,6 +4,7 @@ import com.github.frtu.logs.core.RpcLogger
 import com.github.frtu.logs.core.RpcLogger.entry
 import com.github.frtu.logs.core.StructuredLogger.message
 import com.github.frtu.sample.kafka.persistence.basic.IEmailRepository
+import com.github.frtu.sample.kafka.source.async.KafkaConfiguration.Companion.DEFAULT_LISTENER_CONTAINER_FACTORY
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.DltHandler
@@ -11,13 +12,14 @@ import org.springframework.kafka.annotation.KafkaListener
 import org.springframework.kafka.annotation.RetryableTopic
 import org.springframework.kafka.retrytopic.DltStrategy
 import org.springframework.kafka.retrytopic.TopicSuffixingStrategy
+import org.springframework.kafka.support.Acknowledgment
 import org.springframework.retry.annotation.Backoff
 import org.springframework.stereotype.Service
 
 
 @Service
 class KafkaEmailProcessor(
-    private val repository: IEmailRepository,
+    private val trigger: Trigger,
 ) {
 //    @KafkaHandler
 
@@ -25,6 +27,7 @@ class KafkaEmailProcessor(
         topics = ["\${application.channel.email-source.topic}"],
         groupId = "consumer-group-email-2",
         concurrency = "2",
+        containerFactory = DEFAULT_LISTENER_CONTAINER_FACTORY,
         properties = [
             "max.poll.records=\${application.channel.email-source.max-poll.records}",
             "max.poll.interval.ms=\${application.channel.email-source.max-poll.interval-ms}",
@@ -32,11 +35,11 @@ class KafkaEmailProcessor(
     )
     @RetryableTopic(
         kafkaTemplate = "kafkaTemplate",
-        attempts = "3",
+        attempts = "2",
         backoff = Backoff(
-            delay = 2000,
+            delay = 100,
             maxDelay = 5000,
-            multiplier = 2.0,
+            multiplier = 1.5,
         ),
         timeout = "\${application.channel.email-source.retry.timeout}",
         autoCreateTopics = "true",
@@ -47,6 +50,7 @@ class KafkaEmailProcessor(
     ) // https://docs.spring.io/spring-kafka/reference/retrytopic/retry-config.html
     fun listen(
         record: ConsumerRecord<String, ByteArray>,
+        acknowledgment: Acknowledgment,
     ) {
         rpcLogger.info(
             message("Event received"),
@@ -56,14 +60,13 @@ class KafkaEmailProcessor(
             entry("offset", record.offset()),
             entry("timestamp", record.timestamp())
         )
-//        val uriPath = "/v1/emails"
-//        rpcLogger.info(uri(uriPath), message("find all"))
-//        repository.findAll()
-//
-//        val entity = repository.findById(id.toLong())
-//
-//        val createdId = repository.save(emailEntity)
-        throw RuntimeException("test")
+        try {
+            trigger.received(TriggerData(record.value().decodeToString(), record.topic()))
+            acknowledgment.acknowledge()
+        } catch (th: Throwable) {
+            logger.error("Found exception. Message=${th.message}", th)
+            throw th
+        }
     }
 
     @DltHandler
