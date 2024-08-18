@@ -51,13 +51,26 @@
         <!-- https://github.com/eclipse/jkube/tree/master/quickstarts/maven/docker-file-simple -->
         <jkube.version>1.5.1</jkube.version>
         <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
+        <!--===========================-->
+        <slack.version>1.40.3</slack.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.slack.api</groupId>
             <artifactId>slack-api-client</artifactId>
-            <version>1.40.3</version>
+            <version>${slack.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.slack.api</groupId>
+            <artifactId>slack-api-model-kotlin-extension</artifactId>
+            <version>${slack.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.slack.api</groupId>
+            <artifactId>slack-api-client-kotlin-extension</artifactId>
+            <version>${slack.version}</version>
+        </dependency>
         </dependency>
 
         <!--===========================-->
