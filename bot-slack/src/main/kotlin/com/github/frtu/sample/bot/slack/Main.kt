@@ -1,82 +1,68 @@
 package com.github.frtu.sample.bot.slack
 
-import com.slack.api.app_backend.events.payload.EventsApiPayload
+import com.slack.api.Slack
 import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
-import com.slack.api.bolt.context.builtin.EventContext
-import com.slack.api.bolt.jetty.SlackAppServer
-import com.slack.api.methods.request.views.ViewsPublishRequest.ViewsPublishRequestBuilder
-import com.slack.api.model.block.Blocks.actions
-import com.slack.api.model.block.Blocks.asBlocks
-import com.slack.api.model.block.Blocks.divider
-import com.slack.api.model.block.Blocks.section
-import com.slack.api.model.block.SectionBlock
-import com.slack.api.model.block.composition.BlockCompositions.markdownText
-import com.slack.api.model.block.composition.BlockCompositions.plainText
-import com.slack.api.model.block.element.BlockElements.asElements
-import com.slack.api.model.block.element.BlockElements.button
-import com.slack.api.model.block.element.ButtonElement
-import com.slack.api.model.event.AppHomeOpenedEvent
-import com.slack.api.model.event.MessageEvent
-import com.slack.api.model.view.Views.view
+import com.slack.api.bolt.socket_mode.SocketModeApp
+import com.slack.api.methods.MethodsClient
+import com.slack.api.methods.kotlin_extension.request.chat.blocks
 
 fun main() {
     // Create a new Slack app
     val botToken = System.getenv("SLACK_BOT_TOKEN")
-    val app = App(AppConfig.builder().singleTeamBotToken(botToken).build())
+    val botSigningSecret = System.getenv("SLACK_BOT_SIGNING_SECRET")
+    val app = App(
+        AppConfig.builder()
+            .singleTeamBotToken(botToken)
+            .signingSecret(botSigningSecret)
+            .build()
+    )
 
-    // Event listener for messages
-    app.event(MessageEvent::class.java) { payload, ctx ->
-        val event = payload.event
-        println("Received a message from user: ${event.user}, text: ${event.text}")
+    // https://slack.dev/java-slack-sdk/guides/web-api-basics
+    val slack = Slack.getInstance()
 
-        // Respond to the message if needed
-        ctx.say("Hello <@${event.user}>!")
-        ctx.ack() // Acknowledge the event
-    }
+    // Initialize an API Methods client with the given token
+    val methods: MethodsClient = slack.methods(botToken)
 
-    app.event(AppHomeOpenedEvent::class.java) { payload: EventsApiPayload<AppHomeOpenedEvent>, ctx: EventContext ->
-        val appHomeView = view { view ->
-            view
-                .type("home")
-                .blocks(asBlocks(
-                    section { section: SectionBlock.SectionBlockBuilder ->
-                        section.text(markdownText { mt ->
-                            mt.text(
-                                "*Welcome to your _App's Home tab_* :tada:"
-                            )
-                        })
-                    },
-                    divider(),
-                    section { section: SectionBlock.SectionBlockBuilder ->
-                        section.text(markdownText { mt ->
-                            mt.text(
-                                "This button won't do much for now but you can set up a listener for it using the `actions()` method and passing its unique `action_id`. See an example on <https://slack.dev/java-slack-sdk/guides/interactive-components|slack.dev/java-slack-sdk>."
-                            )
-                        })
-                    },
-                    actions { actions ->
-                        actions
-                            .elements(
-                                asElements(
-                                    button { b: ButtonElement.ButtonElementBuilder ->
-                                        b.text(plainText { pt ->
-                                            pt.text("Click me!")
-                                        }).value("button1").actionId("button_1")
-                                    }
-                                )
-                            )
+    // Build a request object
+    val response = methods.chatPostMessage { req ->
+        req
+            .channel("#random")
+            .blocks {
+                section {
+                    // "text" fields can be constructed via `plainText()` and `markdownText()`
+                    markdownText("*Please select a restaurant:*")
+                }
+                divider()
+                actions {
+                    // To align with the JSON structure, you could put the `elements { }` block around the buttons but for brevity it can be omitted
+                    // The same is true for things such as the section block's "accessory" container
+                    button {
+                        // For instances where only `plain_text` is acceptable, the field's name can be filled with `plain_text` inputs
+                        text("Farmhouse", emoji = true)
+                        value("v1")
                     }
-                ))
-        }
-        val res = ctx.client().viewsPublish { r: ViewsPublishRequestBuilder ->
-            r.userId(payload.event.user)
-                .view(appHomeView)
-        }
-        println("Response ok:${res.isOk}")
-        ctx.ack()
+                    button {
+                        text("Kin Khao", emoji = true)
+                        value("v2")
+                    }
+                }
+            }
     }
 
-    val server = SlackAppServer(app)
-    server.start() // http://localhost:3000/slack/events
+    // Get a response as a Java object
+    if (response.isOk) {
+        val postedMessage = response.message
+        println(postedMessage)
+    } else {
+        val errorCode = response.error // e.g., "invalid_auth", "channel_not_found"
+    }
+
+    // Start the app in Socket Mode
+    val appToken = System.getenv("SLACK_APP_TOKEN")
+    val socketModeApp = SocketModeApp(appToken, app)
+    socketModeApp.start()
+
+//    val server = SlackAppServer(app)
+//    server.start() // http://localhost:3000/slack/events
 }
