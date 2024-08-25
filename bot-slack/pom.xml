@@ -44,7 +44,7 @@
         <javax.websocket-api.version>1.1</javax.websocket-api.version>
         <Java-WebSocket.version>1.5.7</Java-WebSocket.version>
         <tyrus-standalone-client.version>1.20</tyrus-standalone-client.version>
-        <logback.version>1.5.7</logback.version>
+        <logback.version>1.5.6</logback.version>
     </properties>
 
     <dependencies>

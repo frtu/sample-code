@@ -21,7 +21,7 @@ When creating and installing your app, don't forget to
 
 ## Features
 
-Events :
+[Events subscription](https://api.slack.com/apis/events-api) :
 
 * Listen to event when bot is being called : `AppMentionEvent`
 
