@@ -19,6 +19,17 @@ When creating and installing your app, don't forget to
 
 * Install the app to receive bot/user tokens (bot: xoxb-, user: xoxp-)
 
+## Features
+
+Events :
+
+* Listen to event when bot is being called : `AppMentionEvent`
+
+Settings > Features > [Slash commands](https://slack.dev/java-slack-sdk/guides/slash-commands)
+
+* Respond to commands : `/hello`
+
+
 ## Release notes
 
 ### 0.0.1-SNAPSHOT - Current version
