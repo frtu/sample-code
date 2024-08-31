@@ -9,7 +9,7 @@ Allow to connect to Slack & receive message.
 This project intend to use [socket mode](https://slack.dev/java-slack-sdk/guides/socket-mode) which rely on Websocket &
 avoid the need to open HTTP webhook callback.
 
-When creating and installing your app, don't forget to 
+When creating and installing your app, don't forget to
 
 * Go to Settings > Basic Information > Add a new App-Level Token with the `connections:write` scope
 * Get the generated token value that starts with xapp-
@@ -18,6 +18,11 @@ When creating and installing your app, don't forget to
 * Configure the features (without setting Request URLs)
 
 * Install the app to receive bot/user tokens (bot: xoxb-, user: xoxp-)
+
+### Alternative
+
+You can also use [Slack Basic API](https://slack.dev/java-slack-sdk/guides/web-api-basics/) that offers a simple way to
+send message.
 
 ## Features
 
@@ -28,7 +33,6 @@ When creating and installing your app, don't forget to
 Settings > Features > [Slash commands](https://slack.dev/java-slack-sdk/guides/slash-commands)
 
 * Respond to commands : `/hello`
-
 
 ## Release notes
 

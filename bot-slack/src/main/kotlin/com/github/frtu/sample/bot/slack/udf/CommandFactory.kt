@@ -1,4 +1,4 @@
-package com.github.frtu.sample.bot.slack.config
+package com.github.frtu.sample.bot.slack.udf
 
 import com.slack.api.bolt.handler.builtin.SlashCommandHandler
 import org.springframework.context.annotation.Bean

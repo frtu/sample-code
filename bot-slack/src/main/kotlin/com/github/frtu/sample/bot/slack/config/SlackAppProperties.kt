@@ -1,4 +1,4 @@
-package com.github.frtu.sample.bot.slack.core
+package com.github.frtu.sample.bot.slack.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 

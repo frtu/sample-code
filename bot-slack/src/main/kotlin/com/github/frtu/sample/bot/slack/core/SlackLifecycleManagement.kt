@@ -4,23 +4,26 @@ import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
 import com.slack.api.bolt.socket_mode.SocketModeApp
 import com.slack.api.socket_mode.SocketModeClient
-import jakarta.annotation.PostConstruct
-import org.springframework.stereotype.Service
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.context.event.ApplicationReadyEvent
+import org.springframework.context.event.ContextClosedEvent
+import org.springframework.context.event.EventListener
+import org.springframework.stereotype.Component
 
-@Service
-class SlackService(
-    private val slackAppProperties: SlackAppProperties,
+@Component
+class SlackLifecycleManagement(
+    private val appConfig: AppConfig,
+    @Qualifier(KEY_APP_TOKEN)
+    private val appToken: String,
     private val slackCommandRegistry: SlackCommandRegistry,
 ) {
     private lateinit var app: App
-    private lateinit var socketModeApp : SocketModeApp
+    private lateinit var socketModeApp: SocketModeApp
 
-    @PostConstruct
-    fun initialize() {
-        val appConfig = AppConfig.builder()
-            .singleTeamBotToken(slackAppProperties.botOauthToken)
-            .signingSecret(slackAppProperties.signingSecret)
-            .build()
+    @EventListener(ApplicationReadyEvent::class)
+    fun handleAppReady() {
+        logger.info("== Receiving ApplicationReadyEvent ==")
 
         // Initialize the App and register listeners
         app = App(appConfig)
@@ -33,7 +36,7 @@ class SlackService(
         // Initialize the adapter for Socket Mode
         // with an app-level token and your Bolt app with listeners.
         socketModeApp = SocketModeApp(
-            slackAppProperties.token,
+            appToken,
             SocketModeClient.Backend.JavaWebSocket,
             app,
         )
@@ -41,4 +44,16 @@ class SlackService(
         // If you do not want to block this thread, use #startAsync() instead.
         socketModeApp.start()
     }
+
+    @EventListener(ContextClosedEvent::class)
+    fun handleContextClosedEvent() {
+        logger.info("== Receiving ContextClosedEvent ==")
+        socketModeApp.close()
+    }
+
+    companion object {
+        const val KEY_APP_TOKEN = "APP_TOKEN_QUALIFIER"
+    }
+
+    private val logger = LoggerFactory.getLogger(this::class.java)
 }
