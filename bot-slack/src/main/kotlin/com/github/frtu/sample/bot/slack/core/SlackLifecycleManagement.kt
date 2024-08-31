@@ -2,7 +2,9 @@ package com.github.frtu.sample.bot.slack.core
 
 import com.slack.api.bolt.App
 import com.slack.api.bolt.AppConfig
+import com.slack.api.bolt.handler.BoltEventHandler
 import com.slack.api.bolt.socket_mode.SocketModeApp
+import com.slack.api.model.event.Event
 import com.slack.api.socket_mode.SocketModeClient
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Qualifier
@@ -17,6 +19,7 @@ class SlackLifecycleManagement(
     @Qualifier(KEY_APP_TOKEN)
     private val appToken: String,
     private val slackCommandRegistry: SlackCommandRegistry,
+    private val slackEventHandlerRegistry: SlackEventHandlerRegistry,
 ) {
     private lateinit var app: App
     private lateinit var socketModeApp: SocketModeApp
@@ -31,6 +34,10 @@ class SlackLifecycleManagement(
         // Register all commands available as Spring Beans
         slackCommandRegistry.getAll().forEach { (name, command) ->
             app.command("/$name", command)
+        }
+        slackEventHandlerRegistry.getAll().forEach { (eventType, handler) ->
+            @Suppress("UNCHECKED_CAST")
+            app.event(eventType as Class<Event>, handler as BoltEventHandler<Event>)
         }
 
         // Initialize the adapter for Socket Mode
