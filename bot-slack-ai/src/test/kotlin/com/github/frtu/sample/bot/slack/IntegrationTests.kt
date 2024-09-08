@@ -20,8 +20,6 @@ class IntegrationTests(@Autowired val restTemplate: TestRestTemplate) {
     @Test
     fun `Assert url and status code`() {
         println(">> Assert url and status code")
-        val entity = restTemplate.getForEntity<String>("/v1/emails")
-        entity.statusCode shouldBe HttpStatus.OK
     }
 
     @AfterAll

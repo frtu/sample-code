@@ -1,6 +1,6 @@
 package com.github.frtu.sample.bot.slack.udf
 
-import com.github.frtu.sample.bot.slack.event.MessageEventHandler
+import com.github.frtu.kotlin.spring.slack.event.MessageEventHandler
 import com.slack.api.app_backend.events.payload.EventsApiPayload
 import com.slack.api.bolt.context.builtin.EventContext
 import com.slack.api.bolt.handler.BoltEventHandler
