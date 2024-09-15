@@ -2,7 +2,7 @@ package com.github.frtu.sample.ai.os.tool
 
 import com.aallam.openai.api.chat.ChatCompletionFunction
 import com.aallam.openai.api.chat.Parameters
-import com.github.frtu.sample.ai.agents.os.app.utils.SchemaGen
+import com.github.frtu.sample.utils.SchemaGen
 import kotlin.reflect.KFunction2
 
 /**

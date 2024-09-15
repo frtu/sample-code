@@ -1,4 +1,4 @@
-package com.github.frtu.sample.ai.agents.os.app
+package com.github.frtu.sample.ai.agents.app
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.github.frtu.sample.ai.os.llm.Chat

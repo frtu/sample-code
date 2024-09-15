@@ -1,4 +1,4 @@
-package com.github.frtu.sample.ai.agents.os.app
+package com.github.frtu.sample.ai.agents.app
 
 data class WeatherInfo(
     val location: String,
