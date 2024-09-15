@@ -26,6 +26,9 @@ repositories {
 }
 
 dependencies {
+	// frtu libs
+	implementation(libs.spring.boot.slack)
+
 	// OpenAI aallam libs
 	implementation(libs.aallam.openai.client)
 	implementation(libs.ktor.client.apache)
