@@ -26,7 +26,13 @@ repositories {
 }
 
 dependencies {
+	// OpenAI aallam libs
+	implementation(libs.aallam.openai.client)
+	implementation(libs.ktor.client.apache)
+	implementation(libs.ktoken)
+
 	// Commons
+	implementation(libs.jsonschema.generate)
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 	// Spring

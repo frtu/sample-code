@@ -1,4 +1,4 @@
-package com.github.frtu.ai.agents.assistant
+package com.github.frtu.sample.bot.slack
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
