@@ -29,7 +29,6 @@ hs_err_pid*
 replay_pid*
 
 ### Gradle ###
-gradlew*
 .gradle
 **/build/
 !src/**/build/
