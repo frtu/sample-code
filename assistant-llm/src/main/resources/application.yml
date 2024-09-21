@@ -7,6 +7,11 @@ application:
     token: ${SLACK_APP_TOKEN:xapp-xx}
     signing-secret: ${SLACK_APP_SIGNING_SECRET:yy}
     bot-oauth-token: ${SLACK_APP_BOT_OAUTH_TOKEN:xoxb-zz}
+  ai.os:
+    # https://platform.openai.com/docs/models/continuous-model-upgrades
+    model: ${AI_OS_MODEL:mistral} # To use OpenAI model 'gpt-xx' please configure 'api-key'
+    base-url: ${AI_OS_LOCAL_BASE_URL:http://localhost:11434/v1/}
+    api-key: ${AI_OS_OPENAI_API_KEY:sk-xxx}
 
 # ======================================
 # Spring Boot
