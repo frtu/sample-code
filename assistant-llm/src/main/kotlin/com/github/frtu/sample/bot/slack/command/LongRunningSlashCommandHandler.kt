@@ -21,26 +21,31 @@ class LongRunningSlashCommandHandler(
     private val defaultErrorMessage: String? = null,
 ) : SlashCommandHandler {
     override fun apply(req: SlashCommandRequest, ctx: SlashCommandContext): Response = runBlocking {
+        // Init
+        val logger = ctx.logger
+
         // Immediate response to avoid timeout
-        with("Processing your request...") {
-            ctx.logger.info(this)
+        val preliminaryResponse = with("Processing your request...") {
+            logger.info(this)
             ctx.ack(this)
         }
+        // Fork a parallel execution
         thread {
             try {
                 runBlocking {
                     // Long-running task
-                    ok(executorHandler.invoke(req, ctx)).also {
-                        ctx.logger.info("Finished: $it")
+                    ok(executorHandler.invoke(req, ctx, logger)).also {
+                        logger.info("Finished: $it")
                         ctx.respond(it.body)
                     }
                 }
             } catch (e: Exception) {
-                ctx.logger.error(e.message, e)
+                logger.error(e.message, e)
                 ctx.respond(defaultErrorMessage ?: e.message)
                 error(errorHandler(e))
             }
         }
-        ctx.ack()
+        // Return
+        preliminaryResponse
     }
 }
