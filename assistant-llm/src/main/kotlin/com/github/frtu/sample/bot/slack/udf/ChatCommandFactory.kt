@@ -1,10 +1,10 @@
 package com.github.frtu.sample.bot.slack.udf
 
-import com.github.frtu.sample.ai.os.llm.Chat
-import com.github.frtu.sample.ai.os.memory.Conversation
-import com.github.frtu.sample.ai.os.tool.FunctionRegistry
-import com.github.frtu.sample.bot.slack.command.ExecutorHandler
-import com.github.frtu.sample.bot.slack.command.LongRunningSlashCommandHandler
+import com.github.frtu.kotlin.llm.os.llm.Chat
+import com.github.frtu.kotlin.llm.os.memory.Conversation
+import com.github.frtu.kotlin.llm.os.tool.FunctionRegistry
+import com.github.frtu.kotlin.spring.slack.command.ExecutorHandler
+import com.github.frtu.kotlin.spring.slack.command.LongRunningSlashCommandHandler
 import com.slack.api.bolt.context.builtin.SlashCommandContext
 import com.slack.api.bolt.handler.builtin.SlashCommandHandler
 import com.slack.api.bolt.request.builtin.SlashCommandRequest
@@ -56,6 +56,7 @@ class ChatCommandFactory {
             }
         },
         errorHandler = { 400 },
+        defaultStartingMessage = "Processing your request...",
         defaultErrorMessage = "Sorry, an error occurred while processing your request.",
     )
 }

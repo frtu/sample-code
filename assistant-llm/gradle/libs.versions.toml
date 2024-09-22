@@ -3,7 +3,7 @@
 aallam-openai = "3.5.1"
 
 # libs
-frtu-libs = "2.0.3"
+frtu-libs = "2.0.4"
 kjetland = "1.0.39"
 
 # core
@@ -13,7 +13,9 @@ ktor = "2.3.2"
 
 [libraries]
 # frtu libs
+serdes-json = { group = "com.github.frtu.libs", name = "lib-serdes-json", version.ref = "frtu-libs" }
 spring-boot-slack = { group = "com.github.frtu.libs", name = "lib-spring-boot-slack", version.ref = "frtu-libs" }
+spring-boot-llm-os = { group = "com.github.frtu.libs", name = "lib-spring-boot-llm-os", version.ref = "frtu-libs" }
 
 # aallam-openai
 aallam-openai-client = { group = "com.aallam.openai", name = "openai-client", version.ref = "aallam-openai" }

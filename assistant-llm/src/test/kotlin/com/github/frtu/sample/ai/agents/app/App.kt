@@ -1,10 +1,10 @@
 package com.github.frtu.sample.ai.agents.app
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.github.frtu.sample.ai.os.llm.Chat
-import com.github.frtu.sample.ai.os.llm.openai.OpenAiCompatibleChat
-import com.github.frtu.sample.ai.os.memory.Conversation
-import com.github.frtu.sample.ai.os.tool.registry
+import com.github.frtu.kotlin.llm.os.llm.Chat
+import com.github.frtu.kotlin.llm.os.llm.openai.OpenAiCompatibleChat
+import com.github.frtu.kotlin.llm.os.memory.Conversation
+import com.github.frtu.kotlin.llm.os.tool.registry
 import kotlinx.serialization.json.jsonPrimitive
 
 suspend fun main() {

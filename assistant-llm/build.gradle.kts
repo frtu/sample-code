@@ -27,6 +27,8 @@ repositories {
 
 dependencies {
 	// frtu libs
+	implementation(libs.serdes.json)
+	implementation(libs.spring.boot.llm.os)
 	implementation(libs.spring.boot.slack)
 
 	// OpenAI aallam libs
