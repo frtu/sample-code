@@ -34,9 +34,9 @@ class SubscriptionWorkflowImpl : SubscriptionWorkflow {
         Workflow.sleep(3_000)
 
         // Release them
-        childReminderWorkflowList.forEach {
-            Async.function(it::finalize).get()
-        }
+//        childReminderWorkflowList.forEach {
+//            Async.function(it::finalize).get()
+//        }
         structuredLogger.info(flowId(subscriptionEvent.id), phase("REMINDER_STARTED"))
     }
 
