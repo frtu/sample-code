@@ -6,7 +6,6 @@ object Versions {
     const val kotlin = "1.5.32"
     const val kotlinx = "1.5.2"
 
-    const val jackson = "2.13.2.1" // 2022-03-30
     const val spring_boot = "2.6.6"
     const val spring_cloud = "2021.0.2"
     const val springdoc = "1.5.4"
@@ -47,18 +46,18 @@ object Libs {
     //---------- TRACING -----------
     const val opentelemetry_sdk = "io.opentelemetry:opentelemetry-sdk"
     const val opentelemetry_trace_propagators = "io.opentelemetry:opentelemetry-extension-trace-propagators"
-    const val opentelemetry_semconv = "io.opentelemetry:opentelemetry-semconv:${Versions.opentelemetry}-alpha"
-    const val opentelemetry_shim = "io.opentelemetry:opentelemetry-opentracing-shim:${Versions.opentelemetry}-alpha"
+    const val opentelemetry_semconv = "io.opentelemetry:opentelemetry-semconv"
+    const val opentelemetry_shim = "io.opentelemetry:opentelemetry-opentracing-shim"
 
     const val opentelemetry_exporter = "io.opentelemetry:opentelemetry-exporter-jaeger"
     const val trace_impl = "io.jaegertracing:jaeger-client:${Versions.jaeger}"
 
     //---------- LIBS BOM -----------
-    const val bom_jackson = "com.fasterxml.jackson:jackson-bom:${Versions.jackson}"
     const val bom_kotlin_base = "com.github.frtu.archetype:kotlin-base-pom:${Versions.frtu_base}"
     const val bom_kotlin_libs = "com.github.frtu.libs:lib-kotlin-bom:${Versions.frtu_libs}"
     const val bom_logger = "com.github.frtu.logs:logger-bom:${Versions.frtu_logs}"
     const val bom_opentelemetry = "io.opentelemetry:opentelemetry-bom:${Versions.opentelemetry}"
+    const val bom_opentelemetry_alpha = "io.opentelemetry:opentelemetry-bom-alpha:${Versions.opentelemetry}-alpha"
 
     //---------- TESTS -----------
     const val junit = "org.junit.jupiter:junit-jupiter"

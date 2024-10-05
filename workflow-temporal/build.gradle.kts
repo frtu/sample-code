@@ -83,14 +83,13 @@ subprojects {
         testImplementation(Libs.junit)
         testImplementation(Libs.mock)
         testImplementation(Libs.assertions)
-        testImplementation(kotlin("test"))
 
         // Platform - BOMs
-        implementation(platform(Libs.bom_jackson))
         implementation(platform(Libs.bom_kotlin_base))
         implementation(platform(Libs.bom_kotlin_libs))
         implementation(platform(Libs.bom_logger))
         implementation(platform(Libs.bom_opentelemetry))
+        implementation(platform(Libs.bom_opentelemetry_alpha))
         implementation(platform(kotlin("bom")))
         implementation(kotlin("stdlib-jdk8"))
         implementation(kotlin("reflect"))

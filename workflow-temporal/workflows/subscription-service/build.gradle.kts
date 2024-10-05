@@ -8,7 +8,6 @@ plugins {
     kotlin("plugin.spring") version Versions.kotlin
     kotlin("plugin.jpa") version Versions.kotlin
     id("org.springframework.boot") version Versions.spring_boot
-    id("com.gorylenko.gradle-git-properties") version "2.2.4"
 }
 
 apply(plugin = "org.jetbrains.kotlin.jvm")
