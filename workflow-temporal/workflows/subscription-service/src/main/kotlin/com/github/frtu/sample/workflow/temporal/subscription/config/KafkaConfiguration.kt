@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.integration.dsl.IntegrationFlow
-import org.springframework.integration.dsl.IntegrationFlows
 import org.springframework.integration.kafka.dsl.Kafka
 import org.springframework.integration.kafka.inbound.KafkaMessageDrivenChannelAdapter.ListenerMode
 import org.springframework.kafka.core.ConsumerFactory
@@ -26,7 +25,7 @@ class KafkaConfiguration {
 
     @Bean
     @Throws(Exception::class)
-    fun kafkaReader(): IntegrationFlow = IntegrationFlows
+    fun kafkaReader(): IntegrationFlow = IntegrationFlow
         .from(
             Kafka.messageDrivenChannelAdapter(
                 KafkaMessageListenerContainer(consumerFactory(), ContainerProperties(inputTopic)),

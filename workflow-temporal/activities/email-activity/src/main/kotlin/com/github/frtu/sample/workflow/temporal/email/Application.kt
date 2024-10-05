@@ -26,6 +26,6 @@ class Application {
 }
 
 fun main(args: Array<String>) {
-    System.getProperties()["server.port"] = 8083;
+    System.getProperties()["server.port"] = 18080;
     runApplication<Application>(*args)
 }

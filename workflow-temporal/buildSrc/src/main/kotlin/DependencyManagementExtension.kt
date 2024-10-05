@@ -8,7 +8,7 @@ object Versions {
 
     const val spring_boot = "3.3.1"
     const val spring_cloud = "2023.0.3"
-    const val springdoc = "1.5.4"
+    const val springdoc = "1.8.0"
     const val opentelemetry = "1.42.1"
     const val jaeger = "1.8.0"
     const val frtu_base = "2.0.0"
