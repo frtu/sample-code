@@ -1,7 +1,7 @@
 package com.github.frtu.sample.workflow.temporal.email.config
 
 import com.github.frtu.sample.workflow.temporal.email.activity.EmailSinkActivity
-import com.github.frtu.sample.workflow.temporal.email.activity.TASK_QUEUE_EMAIL
+import com.github.frtu.sample.workflow.temporal.email.activity.EmailSinkActivity.Companion.TASK_QUEUE_EMAIL
 import com.github.frtu.workflow.temporal.config.TemporalConfig
 import io.temporal.client.WorkflowClient
 import io.temporal.worker.Worker

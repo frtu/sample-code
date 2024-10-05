@@ -6,17 +6,16 @@ import com.github.frtu.logs.core.StructuredLogger
 import com.github.frtu.logs.core.StructuredLogger.*
 import com.github.frtu.sample.workflow.temporal.reminder.domain.ReminderEvent
 import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflow
-import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.TASK_QUEUE_REMINDER
+import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflow.Companion.TASK_QUEUE_REMINDER
 import com.github.frtu.sample.workflow.temporal.subscription.domain.SubscriptionEvent
 import io.temporal.api.enums.v1.ParentClosePolicy
 import io.temporal.api.enums.v1.WorkflowIdReusePolicy
 import io.temporal.common.RetryOptions
 import io.temporal.workflow.Async
 import io.temporal.workflow.ChildWorkflowOptions
-import io.temporal.workflow.Promise
 import io.temporal.workflow.Workflow
 import java.time.Duration
-import java.util.*
+import java.util.UUID
 
 class SubscriptionWorkflowImpl : SubscriptionWorkflow {
     override fun start(subscriptionEvent: SubscriptionEvent) {

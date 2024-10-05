@@ -5,8 +5,10 @@ import io.temporal.activity.ActivityMethod
 
 @ActivityInterface
 interface EmailSinkActivity {
+    companion object {
+        const val TASK_QUEUE_EMAIL = "TASK_QUEUE_EMAIL"
+    }
+
     @ActivityMethod
     fun emit(email: Email)
 }
-
-const val TASK_QUEUE_EMAIL = "TASK_QUEUE_EMAIL"

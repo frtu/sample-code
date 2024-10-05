@@ -9,6 +9,10 @@ import io.temporal.workflow.WorkflowMethod
 
 @WorkflowInterface
 interface ReminderWorkflow {
+    companion object {
+        const val TASK_QUEUE_REMINDER = "TASK_QUEUE_REMINDER"
+    }
+
     @WorkflowMethod
     fun startReminder(reminderEvent: ReminderEvent)
 
@@ -18,5 +22,3 @@ interface ReminderWorkflow {
     @SignalMethod
     fun finalize()
 }
-
-const val TASK_QUEUE_REMINDER = "TASK_QUEUE_REMINDER"

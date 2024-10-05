@@ -1,7 +1,7 @@
 package com.github.frtu.sample.workflow.temporal.reminder.config
 
+import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflow.Companion.TASK_QUEUE_REMINDER
 import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflowImpl
-import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.TASK_QUEUE_REMINDER
 import com.github.frtu.workflow.temporal.config.TemporalConfig
 import io.temporal.worker.WorkerFactory
 import org.springframework.context.annotation.Bean

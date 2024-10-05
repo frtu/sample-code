@@ -6,8 +6,10 @@ import io.temporal.workflow.WorkflowMethod
 
 @WorkflowInterface
 interface SubscriptionWorkflow {
+    companion object {
+        const val TASK_QUEUE_SUBSCRIPTION = "TASK_QUEUE_SUBSCRIPTION"
+    }
+
     @WorkflowMethod
     fun start(subscriptionEvent: SubscriptionEvent)
 }
-
-const val TASK_QUEUE_SUBSCRIPTION = "TASK_QUEUE_SUBSCRIPTION"

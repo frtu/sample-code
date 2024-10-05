@@ -5,7 +5,7 @@ import com.github.frtu.logs.core.StructuredLogger.flowId
 import com.github.frtu.logs.core.StructuredLogger.key
 import com.github.frtu.sample.workflow.temporal.subscription.domain.SubscriptionEvent
 import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflow
-import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.TASK_QUEUE_SUBSCRIPTION
+import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflow.Companion.TASK_QUEUE_SUBSCRIPTION
 import io.temporal.client.WorkflowClient
 import io.temporal.client.WorkflowOptions
 import java.time.Duration
