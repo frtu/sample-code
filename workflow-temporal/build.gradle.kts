@@ -56,6 +56,10 @@ allprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        maven {
+            url = uri("http://repo.spring.io/release")
+            isAllowInsecureProtocol = true
+        }
     }
 }
 

@@ -13,3 +13,19 @@ include(
 rootProject.children.forEach {
     it.name = it.name.replace("/", "-")
 }
+
+// plugin repositories
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+        google()
+    }
+}
+// build repositories
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+        google()
+    }
+}

@@ -1,24 +1,24 @@
 object Versions {
-    const val java = "11"
+    const val java = "17"
 
     // Allow to enable >1.4 syntax
-    const val language = "1.4"
-    const val kotlin = "1.5.32"
-    const val kotlinx = "1.5.2"
+    const val language = "1.7"
+    const val kotlin = "1.9.20"
+    const val kotlinx = "1.8.1"
 
-    const val spring_boot = "2.6.6"
-    const val spring_cloud = "2021.0.2"
+    const val spring_boot = "3.3.1"
+    const val spring_cloud = "2023.0.3"
     const val springdoc = "1.5.4"
-    const val opentelemetry = "1.13.0" // 2022-04-09
+    const val opentelemetry = "1.42.1"
     const val jaeger = "1.8.0"
-    const val frtu_base = "1.2.3"
-    const val frtu_libs = "1.1.5"
-    const val frtu_logs = "1.1.4"
+    const val frtu_base = "2.0.0"
+    const val frtu_libs = "2.0.4"
+    const val frtu_logs = "1.1.5"
 
     const val plugin_jacoco = "0.8.8" // 2022-04-05
     const val plugin_google_format = "0.9" // 2020-06-09
 
-    const val temporal = "1.10.0"
+    const val temporal = "1.25.2"
     const val commons_configuration = "1.10"
 }
 
