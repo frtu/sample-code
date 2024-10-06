@@ -2,13 +2,11 @@ package com.github.frtu.sample.workflow.temporal.email
 
 import com.github.frtu.sample.workflow.temporal.activity.email.Email
 import com.github.frtu.sample.workflow.temporal.activity.email.EmailSinkActivityImpl
-import com.github.frtu.sample.workflow.temporal.email.config.EmailActivityConfig
 import java.util.*
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Import
 
 @SpringBootApplication
 class Application {

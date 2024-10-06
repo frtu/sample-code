@@ -21,7 +21,8 @@
         <logger name="com.github.frtu.sample.workflow.temporal" level="TRACE" additivity="true"/>
 
         <!-- Engine -->
-        <logger name="io.temporal.internal.worker" level="TRACE" additivity="true"/>
+        <logger name="io.temporal.internal.worker" level="DEBUG" additivity="true"/>
+        <logger name="org.apache.kafka" level="WARN" additivity="true"/>
 
         <root level="INFO">
             <appender-ref ref="STDOUT"/>
