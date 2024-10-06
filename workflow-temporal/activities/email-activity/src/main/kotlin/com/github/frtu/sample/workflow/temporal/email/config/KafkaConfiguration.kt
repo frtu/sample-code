@@ -1,6 +1,6 @@
 package com.github.frtu.sample.workflow.temporal.email.config
 
-import com.github.frtu.sample.workflow.temporal.email.activity.Email
+import com.github.frtu.sample.workflow.temporal.activity.email.Email
 import org.apache.kafka.clients.admin.NewTopic
 import org.apache.kafka.clients.producer.ProducerConfig
 import org.apache.kafka.common.serialization.StringSerializer

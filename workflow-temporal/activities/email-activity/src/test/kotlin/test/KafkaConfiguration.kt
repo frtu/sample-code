@@ -1,6 +1,6 @@
 package test
 
-import com.github.frtu.sample.workflow.temporal.email.activity.Email
+import com.github.frtu.sample.workflow.temporal.activity.email.Email
 import org.apache.kafka.clients.admin.NewTopic
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.StringDeserializer

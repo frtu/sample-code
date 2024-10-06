@@ -1,7 +1,7 @@
 package com.github.frtu.sample.workflow.temporal.email
 
-import com.github.frtu.sample.workflow.temporal.email.activity.Email
-import com.github.frtu.sample.workflow.temporal.email.activity.EmailSinkActivityImpl
+import com.github.frtu.sample.workflow.temporal.activity.email.Email
+import com.github.frtu.sample.workflow.temporal.activity.email.EmailSinkActivityImpl
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

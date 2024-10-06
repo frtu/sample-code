@@ -1,4 +1,4 @@
-package com.github.frtu.sample.workflow.temporal.email.activity
+package com.github.frtu.sample.workflow.temporal.activity.email
 
 import io.temporal.activity.ActivityInterface
 import io.temporal.activity.ActivityMethod

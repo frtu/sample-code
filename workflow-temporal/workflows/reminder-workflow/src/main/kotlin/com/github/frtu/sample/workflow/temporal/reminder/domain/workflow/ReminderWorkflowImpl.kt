@@ -3,9 +3,9 @@ package com.github.frtu.sample.workflow.temporal.reminder.domain.workflow
 import com.github.frtu.logs.core.RpcLogger.requestBody
 import com.github.frtu.logs.core.StructuredLogger
 import com.github.frtu.logs.core.StructuredLogger.*
-import com.github.frtu.sample.workflow.temporal.email.activity.Email
-import com.github.frtu.sample.workflow.temporal.email.activity.EmailSinkActivity
-import com.github.frtu.sample.workflow.temporal.email.activity.EmailSinkActivity.Companion.TASK_QUEUE_EMAIL
+import com.github.frtu.sample.workflow.temporal.activity.email.Email
+import com.github.frtu.sample.workflow.temporal.activity.email.EmailSinkActivity
+import com.github.frtu.sample.workflow.temporal.activity.email.EmailSinkActivity.Companion.TASK_QUEUE_EMAIL
 import com.github.frtu.sample.workflow.temporal.reminder.domain.ReminderEvent
 import com.github.frtu.sample.workflow.temporal.reminder.domain.ReminderStatus
 import io.temporal.activity.ActivityOptions

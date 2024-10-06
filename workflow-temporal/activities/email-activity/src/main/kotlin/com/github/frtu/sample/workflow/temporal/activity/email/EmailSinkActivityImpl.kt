@@ -1,4 +1,4 @@
-package com.github.frtu.sample.workflow.temporal.email.activity
+package com.github.frtu.sample.workflow.temporal.activity.email
 
 import com.github.frtu.logs.core.StructuredLogger
 import com.github.frtu.logs.core.StructuredLogger.key

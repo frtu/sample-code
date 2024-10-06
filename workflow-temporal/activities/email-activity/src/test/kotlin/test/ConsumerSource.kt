@@ -1,6 +1,6 @@
 package test
 
-import com.github.frtu.sample.workflow.temporal.email.activity.Email
+import com.github.frtu.sample.workflow.temporal.activity.email.Email
 import org.apache.kafka.clients.consumer.ConsumerRecord
 import org.slf4j.LoggerFactory
 import org.springframework.kafka.annotation.KafkaListener
