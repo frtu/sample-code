@@ -3,6 +3,7 @@ package com.github.frtu.sample.workflow.temporal.subscription.config
 import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflow
 import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflowImpl
 import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflow
+import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflowImplCallActivity
 import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflowImplDoubleChildrenWkf
 import com.github.frtu.workflow.temporal.config.ObservabilityConfig
 import com.github.frtu.workflow.temporal.config.TemporalConfig
@@ -22,7 +23,7 @@ class WorkflowSubscriptionConfig {
     @Bean
     fun worker(factory: WorkerFactory): String {
         factory.newWorker(SubscriptionWorkflow.TASK_QUEUE).registerWorkflowImplementationTypes(
-            SubscriptionWorkflowImplDoubleChildrenWkf::class.java,
+            SubscriptionWorkflowImplCallActivity::class.java,
         )
         factory.newWorker(ReminderWorkflow.TASK_QUEUE).registerWorkflowImplementationTypes(
             ReminderWorkflowImpl::class.java,
