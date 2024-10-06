@@ -6,7 +6,6 @@ from temporalio.worker import Worker
 
 from activities import BankingActivities
 from shared import MONEY_TRANSFER_TASK_QUEUE_NAME
-from workflows import MoneyTransfer
 
 
 async def main() -> None:
@@ -16,7 +15,6 @@ async def main() -> None:
     worker: Worker = Worker(
         client,
         task_queue=MONEY_TRANSFER_TASK_QUEUE_NAME,
-        workflows=[MoneyTransfer],
         activities=[activities.Withdraw, activities.Deposit, activities.Refund],
     )
     await worker.run()
