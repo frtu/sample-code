@@ -26,8 +26,8 @@ class SubscriptionWorkflowImplCallActivity : SubscriptionWorkflow {
         val targetAccountId = UUID.randomUUID()
         val confirmation = bankingActivity.deposit(
             PaymentDetails(
-                sourceAccount = sourceAccountId.toString(),
-                targetAccount = targetAccountId.toString(),
+                sourceAccount = "85-150",
+                targetAccount = "43-812",
                 amount = 10,
                 referenceId = subscriptionEvent.data,
             )
