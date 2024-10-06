@@ -17,7 +17,7 @@ import io.temporal.workflow.Workflow
 import java.time.Duration
 import java.util.UUID
 
-class SubscriptionWorkflowImpl : SubscriptionWorkflow {
+class SubscriptionWorkflowImplDoubleChildrenWkf : SubscriptionWorkflow {
     override fun start(subscriptionEvent: SubscriptionEvent) {
         // Fetch users & startReminder to all of them
         val childReminderWorkflowList = fetchUserIds(subscriptionEvent)
