@@ -1,6 +1,6 @@
 package com.github.frtu.sample.workflow.temporal.reminder.config
 
-import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflow.Companion.TASK_QUEUE_REMINDER
+import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflow
 import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflowImpl
 import com.github.frtu.workflow.temporal.config.TemporalConfig
 import io.temporal.worker.WorkerFactory
@@ -18,7 +18,7 @@ class WorkflowReminderConfig {
      */
     @Bean
     fun worker(factory: WorkerFactory): String {
-        factory.newWorker(TASK_QUEUE_REMINDER).registerWorkflowImplementationTypes(
+        factory.newWorker(ReminderWorkflow.TASK_QUEUE).registerWorkflowImplementationTypes(
             ReminderWorkflowImpl::class.java,
         )
         // Start listening to the Task Queue.

@@ -3,10 +3,11 @@ package com.github.frtu.sample.workflow.temporal.subscription.domain.workflow
 import com.github.frtu.logs.core.RpcLogger.requestBody
 import com.github.frtu.logs.core.RpcLogger.responseBody
 import com.github.frtu.logs.core.StructuredLogger
-import com.github.frtu.logs.core.StructuredLogger.*
+import com.github.frtu.logs.core.StructuredLogger.flowId
+import com.github.frtu.logs.core.StructuredLogger.key
+import com.github.frtu.logs.core.StructuredLogger.phase
 import com.github.frtu.sample.workflow.temporal.reminder.domain.ReminderEvent
 import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflow
-import com.github.frtu.sample.workflow.temporal.reminder.domain.workflow.ReminderWorkflow.Companion.TASK_QUEUE_REMINDER
 import com.github.frtu.sample.workflow.temporal.subscription.domain.SubscriptionEvent
 import io.temporal.api.enums.v1.ParentClosePolicy
 import io.temporal.api.enums.v1.WorkflowIdReusePolicy
@@ -43,7 +44,7 @@ class SubscriptionWorkflowImplDoubleChildrenWkf : SubscriptionWorkflow {
     private fun buildReminderWorkflow() = Workflow.newChildWorkflowStub(
         ReminderWorkflow::class.java,
         ChildWorkflowOptions {
-            setTaskQueue(TASK_QUEUE_REMINDER)
+            setTaskQueue(ReminderWorkflow.TASK_QUEUE)
             setParentClosePolicy(ParentClosePolicy.PARENT_CLOSE_POLICY_ABANDON)
             setWorkflowIdReusePolicy(WorkflowIdReusePolicy.WORKFLOW_ID_REUSE_POLICY_ALLOW_DUPLICATE)
             setRetryOptions(// RetryOptions specify how to automatically handle retries when Activities fail.

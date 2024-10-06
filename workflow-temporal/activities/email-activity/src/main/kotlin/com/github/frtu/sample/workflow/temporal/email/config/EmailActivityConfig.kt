@@ -19,7 +19,7 @@ class EmailActivityConfig {
     fun worker(workflowClient: WorkflowClient, emailSinkActivity: EmailSinkActivity): Worker {
         // Worker factory is used to create Workers that poll specific Task Queues.
         val factory = WorkerFactory.newInstance(workflowClient)
-        val worker = factory.newWorker(TASK_QUEUE_EMAIL)
+        val worker = factory.newWorker(EmailSinkActivity.TASK_QUEUE)
         // This Worker hosts Activity implementations.
         // Activities are stateless and thread safe so a shared instance is used.
         worker.registerActivitiesImplementations(emailSinkActivity)

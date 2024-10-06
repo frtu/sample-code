@@ -5,12 +5,11 @@ import com.github.frtu.logs.core.StructuredLogger.flowId
 import com.github.frtu.logs.core.StructuredLogger.key
 import com.github.frtu.sample.workflow.temporal.subscription.domain.SubscriptionEvent
 import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflow
-import com.github.frtu.sample.workflow.temporal.subscription.domain.workflow.SubscriptionWorkflow.Companion.TASK_QUEUE_SUBSCRIPTION
 import io.temporal.client.WorkflowClient
 import io.temporal.client.WorkflowOptions
 import java.time.Duration
+import java.util.UUID
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 class SubscriptionHandlerImpl(
@@ -22,7 +21,7 @@ class SubscriptionHandlerImpl(
         val workflow: SubscriptionWorkflow = client.newWorkflowStub(
             SubscriptionWorkflow::class.java,
             WorkflowOptions.newBuilder()
-                .setTaskQueue(TASK_QUEUE_SUBSCRIPTION)
+                .setTaskQueue(SubscriptionWorkflow.TASK_QUEUE)
                 .setWorkflowId("SubscriptionWorkflow-$id")
                 .setWorkflowRunTimeout(Duration.ofMinutes(5))
                 .build()

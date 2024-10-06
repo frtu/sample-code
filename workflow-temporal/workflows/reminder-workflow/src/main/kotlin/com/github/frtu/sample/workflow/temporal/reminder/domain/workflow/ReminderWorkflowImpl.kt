@@ -2,10 +2,11 @@ package com.github.frtu.sample.workflow.temporal.reminder.domain.workflow
 
 import com.github.frtu.logs.core.RpcLogger.requestBody
 import com.github.frtu.logs.core.StructuredLogger
-import com.github.frtu.logs.core.StructuredLogger.*
+import com.github.frtu.logs.core.StructuredLogger.flowId
+import com.github.frtu.logs.core.StructuredLogger.key
+import com.github.frtu.logs.core.StructuredLogger.phase
 import com.github.frtu.sample.workflow.temporal.activity.email.Email
 import com.github.frtu.sample.workflow.temporal.activity.email.EmailSinkActivity
-import com.github.frtu.sample.workflow.temporal.activity.email.EmailSinkActivity.Companion.TASK_QUEUE_EMAIL
 import com.github.frtu.sample.workflow.temporal.reminder.domain.ReminderEvent
 import com.github.frtu.sample.workflow.temporal.reminder.domain.ReminderStatus
 import io.temporal.activity.ActivityOptions
@@ -48,7 +49,7 @@ class ReminderWorkflowImpl : ReminderWorkflow {
         EmailSinkActivity::class.java,
         ActivityOptions {
             // ActivityOptions DSL
-            setTaskQueue(TASK_QUEUE_EMAIL)
+            setTaskQueue(EmailSinkActivity.TASK_QUEUE)
             setStartToCloseTimeout(Duration.ofSeconds(5)) // Timeout options specify when to automatically timeout Activities if the process is taking too long.
             // Temporal retries failures by default, this is simply an example.
             setRetryOptions(// RetryOptions specify how to automatically handle retries when Activities fail.

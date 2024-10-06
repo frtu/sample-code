@@ -6,7 +6,7 @@ import io.temporal.activity.ActivityMethod
 @ActivityInterface
 interface EmailSinkActivity {
     companion object {
-        const val TASK_QUEUE_EMAIL = "TASK_QUEUE_EMAIL"
+        const val TASK_QUEUE = "TASK_QUEUE_EMAIL"
     }
 
     @ActivityMethod

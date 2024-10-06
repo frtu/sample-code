@@ -10,7 +10,7 @@ import io.temporal.workflow.WorkflowMethod
 @WorkflowInterface
 interface ReminderWorkflow {
     companion object {
-        const val TASK_QUEUE_REMINDER = "TASK_QUEUE_REMINDER"
+        const val TASK_QUEUE = "TASK_QUEUE_REMINDER"
     }
 
     @WorkflowMethod
