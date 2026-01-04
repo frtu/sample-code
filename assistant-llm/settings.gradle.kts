@@ -1,4 +1,4 @@
-rootProject.name = "assistant"
+rootProject.name = "assistant-llm"
 
 includeBuild("build-support")
 

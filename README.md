@@ -14,7 +14,7 @@ Services :
 
 * [spring-samples](spring-samples) : for Spring core & Spring Boot samples (properties, Unit Tests, ..)
 * [microservices-kotlin](microservices-kotlin) : 2 microservices samples
-* [event-notification-mails](event-notification-mails) : message publisher & consumer
+* [event-stream-mails](event-stream-mails) : message publisher & consumer
 
 ## Guidelines
 
